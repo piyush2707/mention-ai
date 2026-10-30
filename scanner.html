@@ -561,6 +561,31 @@ function makeId(){
   return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
 }
 
+async function saveAuditToCloud(record){
+  try{
+    const {data:{user},error:userError} =
+      await supabaseClient.auth.getUser();
+
+    if(userError) throw userError;
+    if(!user) return "Sign in to enable cloud backup.";
+
+    const {error} = await supabaseClient
+      .from("audits")
+      .insert({
+        user_id:user.id,
+        website_url:record.scannedUrl,
+        score:record.score,
+        result:record
+      });
+
+    if(error) throw error;
+
+    return "Cloud backup saved successfully.";
+  }catch(error){
+    console.error("MENTION cloud save:",error);
+    return "Browser history saved. Cloud backup unavailable.";
+  }
+
 async function runScan(){
   const url = input.value.trim();
 
