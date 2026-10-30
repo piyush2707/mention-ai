@@ -516,6 +516,10 @@ input:focus{border-color:#d7aa00}
 <script src="./supabase-config.js"></script>
 <script>
 const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
+  const supabaseClient = window.supabase.createClient(
+  window.MENTION_SUPABASE_URL,
+  window.MENTION_SUPABASE_KEY
+);
 const STORAGE_KEY = "mention_ai_scan_history_v1";
 const MAX_HISTORY = 30;
 
