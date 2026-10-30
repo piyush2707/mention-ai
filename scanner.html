@@ -5,682 +5,837 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
-<title>Audit Dashboard — MENTION AI</title>
+<title>MENTION AI — Website Intelligence</title>
 <style>
-:root {
+:root{
   --yellow:#ffd43b;
-  --pale:#fff8df;
-  --ink:#191919;
-  --muted:#858585;
-  --line:#eeeeea;
-  --green:#168653;
-  --red:#c45b42;
-  --bg:#fafaf8;
+  --ink:#202020;
+  --muted:#777;
+  --line:#eeeae0;
+  --cream:#fffdf6;
+  --green:#16834a;
+  --red:#bd6b00;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:var(--bg);
+  background:#f8f8f6;
   color:var(--ink);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:Inter,Arial,sans-serif;
 }
 button,input{font:inherit}
 button{cursor:pointer}
-a{color:inherit;text-decoration:none}
 .topbar{
   height:70px;
-  background:#fff;
+  background:white;
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 5%;
-  position:sticky;
-  top:0;
-  z-index:5;
 }
-.logo{font-size:22px;font-weight:850;letter-spacing:-1px}
-.logo span{color:#e5ae00}
-.top-right{display:flex;align-items:center;gap:18px}
-.version{
-  background:var(--pale);
-  padding:7px 12px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:800;
+.logo{
+  font-size:23px;
+  font-weight:900;
+  letter-spacing:-1px;
+  color:var(--ink);
+  text-decoration:none;
 }
-.home-link{font-size:13px;color:#666}
+.logo span{color:#d7a900}
+.top-right{font-size:12px;color:#777}
 .layout{
   display:grid;
   grid-template-columns:225px minmax(0,1fr);
-  max-width:1500px;
-  margin:auto;
   min-height:calc(100vh - 70px);
 }
 .sidebar{
-  padding:32px 18px;
-  background:#fff;
+  background:white;
   border-right:1px solid var(--line);
+  padding:28px 17px;
 }
 .side-label{
-  color:#aaa;
   font-size:10px;
-  letter-spacing:1.5px;
+  color:#aaa;
   font-weight:800;
-  padding:0 12px;
-  margin:10px 0 15px;
+  letter-spacing:1.5px;
+  margin:10px 12px 14px;
 }
-.side-link{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:13px 12px;
-  margin:4px 0;
+.nav{
+  display:block;
+  padding:12px;
+  margin:5px 0;
   border-radius:10px;
   color:#666;
   font-size:13px;
+  text-decoration:none;
 }
-.side-link.active{
-  background:var(--pale);
-  color:#29220c;
-  font-weight:750;
+.nav.active,.nav:hover{
+  background:#fff6d7;
+  color:#725500;
 }
-.side-icon{width:20px;text-align:center}
-.side-note{
-  margin-top:45px;
-  background:#fff9e8;
-  border:1px solid #f5e9c2;
-  border-radius:13px;
-  padding:15px;
-  font-size:12px;
-  color:#78622b;
-  line-height:1.6;
+.main{
+  width:100%;
+  max-width:1250px;
+  padding:35px;
+  margin:auto;
 }
-main{padding:38px 4.5%;min-width:0}
 .eyebrow{
-  color:#a17a00;
-  font-size:10px;
-  font-weight:850;
+  color:#a47d00;
+  font-size:11px;
+  font-weight:800;
   letter-spacing:2px;
 }
 h1{
   font-size:clamp(27px,4vw,38px);
   letter-spacing:-1.5px;
-  margin:12px 0 7px;
+  margin:10px 0;
 }
-.subtitle{color:var(--muted);font-size:14px;line-height:1.6}
-.scanbar{
-  background:#fff;
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+  margin:0 0 25px;
+}
+.panel{
+  background:white;
   border:1px solid var(--line);
-  padding:17px;
-  border-radius:15px;
-  margin:27px 0;
+  border-radius:17px;
+  padding:22px;
+  margin-bottom:22px;
+  box-shadow:0 5px 22px #00000005;
+}
+.panel-head{
   display:flex;
+  justify-content:space-between;
   align-items:center;
   gap:12px;
-  box-shadow:0 5px 20px #00000004;
+  margin-bottom:17px;
 }
-.scanbar input{
+.panel h2{
+  font-size:17px;
+  margin:0;
+  letter-spacing:-.3px;
+}
+.small-muted{font-size:11px;color:#999}
+.input-row{
+  display:flex;
+  gap:10px;
+}
+input{
+  width:100%;
   min-width:0;
-  flex:1;
-  padding:13px 14px;
-  border:1px solid #e5e5e5;
-  border-radius:9px;
+  border:1px solid #e5e2d9;
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
   outline:none;
   font-size:14px;
 }
-.scanbar input:focus{border-color:#e4b51e}
+input:focus{border-color:#d7aa00}
 .primary{
   border:0;
-  border-radius:9px;
-  padding:14px 20px;
+  border-radius:10px;
+  padding:14px 21px;
   background:var(--yellow);
-  color:#211b09;
+  color:#292300;
   font-size:13px;
   font-weight:800;
   white-space:nowrap;
 }
-.primary:disabled{opacity:.55;cursor:wait}
+.primary:disabled{opacity:.5;cursor:wait}
+.secondary{
+  border:1px solid #e8e4d9;
+  background:white;
+  color:#444;
+  padding:10px 14px;
+  border-radius:9px;
+  font-size:12px;
+  font-weight:700;
+}
+.secondary:hover{background:#fff9e7}
 .status{
-  display:none;
-  padding:13px 16px;
-  margin:-12px 0 22px;
-  background:#fff8df;
-  color:#755900;
-  border-radius:10px;
-  font-size:13px;
+  font-size:12px;
+  color:#967000;
+  margin-top:12px;
+  line-height:1.5;
 }
-.section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin:30px 0 15px;
-}
-.section-head h2{font-size:17px;margin:0;letter-spacing:-.3px}
-.muted{color:var(--muted);font-size:12px}
 .metrics{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
+  gap:13px;
+  margin-bottom:22px;
 }
 .metric{
-  background:#fff;
+  background:white;
   border:1px solid var(--line);
   border-radius:14px;
-  padding:19px;
-  min-width:0;
-  animation:rise .5s both;
+  padding:18px;
 }
-.metric-label{color:#888;font-size:11px}
+.metric-label{
+  color:#888;
+  font-size:11px;
+  margin-bottom:12px;
+}
 .metric-value{
   font-size:27px;
   font-weight:850;
   letter-spacing:-1px;
-  margin-top:12px;
 }
-.metric-foot{font-size:11px;color:#999;margin-top:5px}
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:21px;
-  min-width:0;
+.metric-note{
+  color:#999;
+  font-size:10px;
+  margin-top:6px;
 }
-.overview{
-  display:grid;
-  grid-template-columns:260px minmax(0,1fr);
-  gap:15px;
-}
-.score-card{
+.score-layout{
   display:flex;
-  flex-direction:column;
   align-items:center;
-  justify-content:center;
-  text-align:center;
+  gap:25px;
+  flex-wrap:wrap;
 }
 .score-ring{
-  width:165px;
-  height:165px;
+  width:125px;
+  height:125px;
   border-radius:50%;
+  background:conic-gradient(var(--yellow) var(--score,0%),#f0eee8 0);
   display:grid;
   place-items:center;
-  background:conic-gradient(var(--yellow) var(--progress,0%),#f0f0ec 0);
-  position:relative;
-  margin:14px 0;
-  transition:background 1s ease;
+  flex-shrink:0;
 }
-.score-ring:before{
-  content:"";
-  position:absolute;
-  width:135px;
-  height:135px;
+.score-inner{
+  width:99px;
+  height:99px;
   border-radius:50%;
   background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
 }
-.score-inner{position:relative;z-index:1}
-.score-number{font-size:42px;font-weight:850;letter-spacing:-2px}
-.score-outof{font-size:11px;color:#999}
-.score-title{font-size:13px;font-weight:800}
-.score-caption{font-size:11px;color:#999;margin-top:7px}
-.overview-info h3{font-size:17px;margin:2px 0 8px}
-.overview-info>p{font-size:13px;color:#888;line-height:1.6;margin:0 0 19px}
-.info-grid{
+.score-number{
+  font-size:30px;
+  font-weight:900;
+}
+.score-outof{font-size:10px;color:#999}
+.score-description{flex:1;min-width:180px}
+.score-description h3{font-size:17px;margin:0 0 8px}
+.score-description p{font-size:12px;color:#888;line-height:1.6;margin:0}
+.grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
 }
-.info-box{
-  background:#fafaf8;
-  border-radius:10px;
-  padding:13px;
+.info-card,.check-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:15px;
   min-width:0;
 }
-.info-box span{display:block;font-size:10px;color:#999;margin-bottom:7px}
-.info-box strong{
-  font-size:12px;
-  font-weight:650;
-  overflow-wrap:anywhere;
+.info-label{
+  color:#999;
+  font-size:10px;
+  margin-bottom:8px;
+}
+.info-value{
+  font-size:13px;
   line-height:1.5;
+  overflow-wrap:anywhere;
 }
-.check-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:11px;
-}
-.check{
-  border:1px solid var(--line);
-  border-radius:11px;
-  padding:15px;
+.check-card{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  min-width:0;
-  animation:rise .4s both;
+  gap:12px;
 }
-.check-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}
-.check-state{font-size:11px;white-space:nowrap;font-weight:750}
-.pass{color:var(--green)}
-.fail{color:#ad7a16}
-.recommendations{display:grid;gap:11px}
-.recommendation{
-  display:flex;
-  align-items:flex-start;
-  gap:13px;
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:11px;
+.check-name{
+  font-size:12px;
+  font-weight:700;
+  overflow-wrap:anywhere;
 }
-.priority{
-  background:#fff4d0;
-  color:#876500;
-  border-radius:7px;
-  font-size:9px;
-  font-weight:850;
-  padding:6px 8px;
+.check-status{
+  font-size:10px;
+  font-weight:800;
   white-space:nowrap;
 }
-.rec-text{font-size:12px;line-height:1.6}
-.empty{
-  color:#888;
+.good{color:var(--green)}
+.bad{color:var(--red)}
+.recommendations{
+  padding-left:19px;
+  color:#555;
   font-size:13px;
-  padding:20px;
-  text-align:center;
+  line-height:1.8;
 }
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.secondary{
-  border:1px solid #e5e5e5;
-  border-radius:9px;
-  padding:12px 16px;
-  background:white;
-  font-size:12px;
-  font-weight:750;
-}
-.disclaimer{
+.note{
   color:#999;
   font-size:11px;
   line-height:1.7;
-  margin-top:25px;
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  margin-top:18px;
 }
-#results{display:none}
-#placeholder{
-  text-align:center;
-  padding:55px 15px;
-  border:1px dashed #e4e1d6;
-  border-radius:15px;
-  background:#fff;
-  color:#888;
+.history-list{
+  display:grid;
+  gap:10px;
 }
-.placeholder-icon{font-size:32px;margin-bottom:12px}
-#placeholder strong{display:block;color:#333;font-size:15px;margin-bottom:7px}
-footer{
+.history-item{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.history-url{
+  font-size:12px;
+  font-weight:800;
+  overflow-wrap:anywhere;
+}
+.history-date{
+  font-size:10px;
+  color:#999;
+  margin-top:6px;
+}
+.history-score{
+  font-size:20px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.history-actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:9px;
+}
+.history-actions button{
+  border:1px solid #e8e4d9;
+  border-radius:7px;
+  background:white;
+  padding:7px 10px;
+  font-size:10px;
+  font-weight:700;
+}
+.compare-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.compare-card{
+  background:#fffaf0;
+  border:1px solid #f2e9cd;
+  border-radius:12px;
+  padding:16px;
+}
+.compare-score{
+  font-size:30px;
+  font-weight:900;
+  margin:8px 0;
+}
+.change{
+  font-size:12px;
+  font-weight:800;
+}
+.empty{
+  color:#999;
   text-align:center;
-  padding:30px 10px;
+  padding:25px 10px;
+  font-size:12px;
+  line-height:1.7;
+}
+.hidden{display:none!important}
+.footer{
+  text-align:center;
   color:#aaa;
-  font-size:11px;
+  font-size:10px;
+  padding:25px;
 }
-@keyframes rise{
-  from{opacity:0;transform:translateY(12px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@media(max-width:950px){
-  .layout{grid-template-columns:185px minmax(0,1fr)}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{
+    display:flex;
+    gap:5px;
+    overflow-x:auto;
+    padding:9px 13px;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+  .side-label{display:none}
+  .nav{white-space:nowrap;margin:0;padding:10px}
+  .main{padding:22px 15px}
   .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .overview{grid-template-columns:1fr}
-  .score-card{padding:24px}
 }
-@media(max-width:650px){
+@media(max-width:520px){
   .topbar{height:60px;padding:0 17px}
-  .logo{font-size:20px}
-  .top-right{gap:10px}
-  .home-link{font-size:12px}
-  .layout{display:block}
-  .sidebar{display:none}
-  main{padding:28px 16px}
-  h1{font-size:30px}
-  .scanbar{display:grid;grid-template-columns:1fr;padding:13px}
-  .scanbar input{width:100%}
-  .primary{width:100%}
-  .metrics{gap:9px}
-  .metric{padding:14px}
-  .metric-value{font-size:23px}
-  .card{padding:16px}
-  .check-grid{grid-template-columns:1fr}
-  .info-grid{grid-template-columns:1fr}
-  .section-head{align-items:flex-start}
-  .version{font-size:10px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .top-right{font-size:10px}
+  .input-row{flex-direction:column}
+  .input-row .primary{width:100%}
+  .grid{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:1fr}
+  .history-item{align-items:flex-start}
+  .history-score{font-size:17px}
+  .panel{padding:17px}
 }
 @media print{
   body{background:white}
-  .topbar,.sidebar,.scanbar,.status,.actions,footer{display:none!important}
+  .topbar,.sidebar,.scan-panel,.history-panel,.compare-panel,.no-print,.footer{display:none!important}
   .layout{display:block}
-  main{padding:0}
-  #results{display:block!important}
-  .card,.metric{break-inside:avoid;box-shadow:none}
-  #placeholder{display:none!important}
+  .main{max-width:none;padding:0}
+  .panel,.metric{box-shadow:none;break-inside:avoid}
+  #audit{display:block!important}
 }
 </style>
 </head>
 <body>
-
 <header class="topbar">
   <a class="logo" href="./">MENTION<span>.</span></a>
-  <div class="top-right">
-    <span class="version">V0.3.0</span>
-    <a class="home-link" href="./">← Home</a>
-  </div>
+  <div class="top-right">AI VISIBILITY INTELLIGENCE · V0.4.0</div>
 </header>
 
 <div class="layout">
-<aside class="sidebar">
-  <div class="side-label">WORKSPACE</div>
-  <a class="side-link active" href="#dashboard"><span class="side-icon">◫</span> Audit dashboard</a>
-  <a class="side-link" href="#overview"><span class="side-icon">◉</span> Overview</a>
-  <a class="side-link" href="#checks"><span class="side-icon">✓</span> Website checks</a>
-  <a class="side-link" href="#recommendations"><span class="side-icon">✳</span> Recommendations</a>
-  <div class="side-note">
-    <strong>Visibility starts with clarity.</strong>
-    <p>Understand your website's technical signals before working on AI discoverability.</p>
-  </div>
-</aside>
+  <aside class="sidebar">
+    <div class="side-label">WORKSPACE</div>
+    <a class="nav active" href="#overview">▦ Overview</a>
+    <a class="nav" href="#scanner">⌕ New scan</a>
+    <a class="nav" href="#history">◷ Scan history</a>
+    <a class="nav" href="#comparison">⇄ Compare scans</a>
+  </aside>
 
-<main id="dashboard">
-  <div class="eyebrow">✳ MENTION INTELLIGENCE</div>
-  <h1>Website audit dashboard</h1>
-  <p class="subtitle">Analyze your website's readiness signals and discover opportunities to improve.</p>
+  <main class="main">
+    <div class="eyebrow">✳ WEBSITE INTELLIGENCE</div>
+    <h1>Your AI visibility workspace.</h1>
+    <p class="subtitle">Audit website signals, track improvements, and keep your optimization work organized.</p>
 
-  <section class="scanbar">
-    <input id="website" type="url" placeholder="https://yourwebsite.com" aria-label="Website URL">
-    <button class="primary" id="scan">Run new audit ↗</button>
-  </section>
-
-  <div class="status" id="status" role="status" aria-live="polite"></div>
-
-  <div id="placeholder">
-    <div class="placeholder-icon">✳</div>
-    <strong>Your next insight starts here.</strong>
-    Enter a website address above and run your first audit.
-  </div>
-
-  <section id="results">
-    <div class="section-head" id="overview">
-      <h2>Audit overview</h2>
-      <span class="muted" id="scanDate">Latest scan</span>
-    </div>
-
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-label">Readiness score</div>
-        <div class="metric-value" id="metricScore">—</div>
-        <div class="metric-foot">Out of 100</div>
+    <section class="panel scan-panel" id="scanner">
+      <div class="panel-head">
+        <h2>Run a website audit</h2>
+        <span class="small-muted">NEW SCAN</span>
       </div>
-      <div class="metric">
-        <div class="metric-label">Checks detected</div>
-        <div class="metric-value" id="metricPassed">—</div>
-        <div class="metric-foot">Signals found</div>
+      <div class="input-row">
+        <input id="website" type="url" placeholder="https://example.com" autocomplete="url">
+        <button class="primary" id="scanButton">Scan website ↗</button>
       </div>
-      <div class="metric">
-        <div class="metric-label">Opportunities</div>
-        <div class="metric-value" id="metricIssues">—</div>
-        <div class="metric-foot">Items to review</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Checks performed</div>
-        <div class="metric-value" id="metricTotal">8</div>
-        <div class="metric-foot">Website signals</div>
-      </div>
-    </div>
+      <div class="status" id="status" role="status">Enter a website address to begin.</div>
+    </section>
 
-    <div class="section-head">
-      <h2>Performance snapshot</h2>
-      <span class="muted">Based on this scan</span>
-    </div>
-
-    <div class="overview">
-      <div class="card score-card">
-        <div class="muted">WEBSITE READINESS</div>
-        <div class="score-ring" id="scoreRing">
-          <div class="score-inner">
-            <div class="score-number" id="scoreNumber">0</div>
-            <div class="score-outof">/ 100</div>
-          </div>
+    <div id="audit" class="hidden">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Latest audit</h2>
+          <span class="small-muted" id="auditDate"></span>
         </div>
-        <div class="score-title" id="scoreLabel">Awaiting scan</div>
-        <div class="score-caption">Preliminary technical signal score</div>
-      </div>
-
-      <div class="card overview-info">
-        <h3>Website intelligence</h3>
-        <p>Information extracted from the publicly accessible webpage.</p>
-        <div class="info-grid">
-          <div class="info-box">
-            <span>PAGE TITLE</span>
-            <strong id="pageTitle">—</strong>
+        <div class="score-layout">
+          <div class="score-ring" id="scoreRing">
+            <div class="score-inner">
+              <div class="score-number" id="scoreNumber">--</div>
+              <div class="score-outof">OUT OF 100</div>
+            </div>
           </div>
-          <div class="info-box">
-            <span>MAIN HEADING</span>
-            <strong id="mainHeading">—</strong>
-          </div>
-          <div class="info-box">
-            <span>META DESCRIPTION</span>
-            <strong id="metaDescription">—</strong>
-          </div>
-          <div class="info-box">
-            <span>CANONICAL URL</span>
-            <strong id="canonicalUrl">—</strong>
+          <div class="score-description">
+            <h3 id="scoreHeading">Website readiness</h3>
+            <p id="scoreSummary">Preliminary technical website-readiness score based on the checks below.</p>
+            <p class="small-muted" id="scannedUrl" style="margin-top:9px;overflow-wrap:anywhere"></p>
           </div>
         </div>
       </div>
+
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label">Readiness score</div>
+          <div class="metric-value" id="metricScore">--</div>
+          <div class="metric-note">Preliminary score</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Checks detected</div>
+          <div class="metric-value" id="metricPassed">--</div>
+          <div class="metric-note">Signals found</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Opportunities</div>
+          <div class="metric-value" id="metricOpportunities">--</div>
+          <div class="metric-note">Items to review</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Checks performed</div>
+          <div class="metric-value" id="metricTotal">--</div>
+          <div class="metric-note">Technical checks</div>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Website information</h2></div>
+        <div class="grid" id="websiteInfo"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Readiness checks</h2></div>
+        <div class="grid" id="checksGrid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Optimization recommendations</h2></div>
+        <ul class="recommendations" id="recommendations"></ul>
+        <p class="note" id="auditNote"></p>
+      </section>
+
+      <div class="no-print" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px">
+        <button class="primary" id="pdfButton">Export audit PDF ↓</button>
+        <button class="secondary" id="newScanButton">Scan another website</button>
+      </div>
     </div>
 
-    <div class="section-head" id="checks">
-      <h2>Website readiness checks</h2>
-      <span class="muted">8 signals</span>
-    </div>
-    <div class="card">
-      <div class="check-grid" id="checkGrid"></div>
-    </div>
+    <section class="panel history-panel" id="history">
+      <div class="panel-head">
+        <h2>Scan history</h2>
+        <span class="small-muted" id="historyCount">0 SAVED</span>
+      </div>
+      <div id="historyList" class="history-list">
+        <div class="empty">Your completed scans will appear here.</div>
+      </div>
+      <div class="no-print" style="margin-top:14px">
+        <button class="secondary" id="clearHistoryButton">Clear all history</button>
+      </div>
+    </section>
 
-    <div class="section-head" id="recommendations">
-      <h2>Optimization opportunities</h2>
-      <span class="muted">Actionable next steps</span>
-    </div>
-    <div class="card">
-      <div class="recommendations" id="recommendationList"></div>
-    </div>
+    <section class="panel compare-panel" id="comparison">
+      <div class="panel-head">
+        <h2>Compare recent scans</h2>
+        <span class="small-muted">LATEST TWO AUDITS</span>
+      </div>
+      <div id="comparisonContent">
+        <div class="empty">Complete at least two scans to compare their scores.</div>
+      </div>
+    </section>
 
-    <div class="section-head">
-      <h2>Report actions</h2>
+    <div class="footer">
+      MENTION AI · Make AI notice you.<br>
+      Technical website-readiness checks are not measurements of actual AI search visibility.
     </div>
-    <div class="actions">
-      <button class="primary" id="pdf">Export audit PDF ↓</button>
-      <button class="secondary" id="again">Scan another website</button>
-    </div>
-
-    <p class="disclaimer" id="disclaimer">
-      This preliminary audit checks basic website signals. It does not measure actual mentions, citations, rankings or recommendations in ChatGPT, Gemini, Claude, Perplexity or other AI systems. A missing signal is not automatically a defect.
-    </p>
-  </section>
-  <footer>MENTION AI · Make AI notice you.</footer>
-</main>
+  </main>
 </div>
 
 <script>
 const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
+const STORAGE_KEY = "mention_ai_scan_history_v1";
+const MAX_HISTORY = 30;
 
 const input = document.getElementById("website");
-const scanButton = document.getElementById("scan");
+const scanButton = document.getElementById("scanButton");
 const statusBox = document.getElementById("status");
-const results = document.getElementById("results");
-const placeholder = document.getElementById("placeholder");
+const audit = document.getElementById("audit");
 
-const checkNames = {
-  pageTitle:"Page title",
-  metaDescription:"Meta description",
-  mainHeading:"Main heading",
-  canonicalUrl:"Canonical URL",
-  structuredData:"Structured data",
-  robotsTxt:"Robots.txt",
-  sitemap:"XML sitemap",
-  llmsTxt:"LLMs.txt"
-};
+let currentAudit = null;
 
 scanButton.addEventListener("click", runScan);
-input.addEventListener("keydown", event => {
-  if (event.key === "Enter") runScan();
-});
-
-document.getElementById("again").addEventListener("click", () => {
+document.getElementById("pdfButton").addEventListener("click", () => window.print());
+document.getElementById("newScanButton").addEventListener("click", () => {
+  document.getElementById("scanner").scrollIntoView({behavior:"smooth"});
   input.focus();
-  input.scrollIntoView({behavior:"smooth",block:"center"});
 });
+document.getElementById("clearHistoryButton").addEventListener("click", clearHistory);
 
-document.getElementById("pdf").addEventListener("click", () => {
-  window.print();
-});
-
-function setStatus(message) {
-  statusBox.textContent = message;
-  statusBox.style.display = message ? "block" : "none";
+function readHistory(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(saved) ? saved : [];
+  }catch(error){
+    return [];
+  }
 }
 
-function setText(id, value) {
-  document.getElementById(id).textContent = value || "Not detected";
+function writeHistory(items){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items.slice(0,MAX_HISTORY)));
+    return true;
+  }catch(error){
+    statusBox.textContent = "This browser could not save scan history. Check browser storage settings.";
+    return false;
+  }
 }
 
-async function runScan() {
-  let url = input.value.trim();
+function makeId(){
+  return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+}
 
-  if (!url) {
-    setStatus("Please enter a website address.");
+async function runScan(){
+  const url = input.value.trim();
+
+  if(!url){
+    statusBox.textContent = "Please enter a website URL.";
     input.focus();
     return;
   }
 
-  if (!/^https?:\/\//i.test(url)) {
-    url = "https://" + url;
-    input.value = url;
+  let parsed;
+  try{
+    parsed = new URL(url);
+    if(parsed.protocol !== "https:" && parsed.protocol !== "http:"){
+      throw new Error("Use an HTTP or HTTPS website address.");
+    }
+  }catch(error){
+    statusBox.textContent = error.message || "Enter a valid website URL, including https://";
+    return;
   }
 
   scanButton.disabled = true;
   scanButton.textContent = "Scanning...";
-  setStatus("Connecting to website and checking public signals...");
-  results.style.display = "none";
+  statusBox.textContent = "Analyzing publicly accessible website information...";
+  audit.classList.add("hidden");
 
-  try {
-    const response = await fetch(API, {
+  try{
+    const response = await fetch(API,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({url})
+      body:JSON.stringify({url:parsed.href})
     });
 
     const data = await response.json();
 
-    if (!response.ok || !data.success) {
+    if(!response.ok || !data.success){
       throw new Error(data.error || "The scan could not be completed.");
     }
 
-    renderDashboard(data);
-    placeholder.style.display = "none";
-    results.style.display = "block";
-    setStatus("✓ Audit completed successfully.");
-    results.scrollIntoView({behavior:"smooth",block:"start"});
-  } catch(error) {
-    setStatus(error.message || "Unable to complete the scan. Please try again.");
-  } finally {
+    const record = {
+      id:makeId(),
+      savedAt:new Date().toISOString(),
+      score:Number(data.score) || 0,
+      scannedUrl:data.scannedUrl || parsed.href,
+      brandTitle:data.brandTitle || "",
+      metaDescription:data.metaDescription || "",
+      mainHeading:data.mainHeading || "",
+      canonicalUrl:data.canonicalUrl || "",
+      checks:data.checks || {},
+      recommendations:Array.isArray(data.recommendations) ? data.recommendations : [],
+      scannedAt:data.scannedAt || "",
+      note:data.note || "This is a preliminary technical website-readiness audit."
+    };
+
+    currentAudit = record;
+    displayAudit(record);
+
+    const history = readHistory();
+    history.unshift(record);
+    writeHistory(history);
+
+    renderHistory();
+    renderComparison();
+
+    statusBox.textContent = "Audit completed and saved to your scan history.";
+    document.getElementById("audit").scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(error){
+    statusBox.textContent = error.message || "Something went wrong. Please try again.";
+  }finally{
     scanButton.disabled = false;
-    scanButton.textContent = "Run new audit ↗";
+    scanButton.textContent = "Scan website ↗";
   }
 }
 
-function renderDashboard(data) {
-  const checks = data.checks || {};
-  const entries = Object.entries(checkNames);
-  const passed = entries.filter(([key]) => checks[key] === true).length;
-  const total = entries.length;
-  const issues = total - passed;
-  const score = Math.max(0,Math.min(100,Number(data.score) || 0));
+function addText(parent,tag,value,className){
+  const el = document.createElement(tag);
+  el.textContent = value === null || value === undefined || value === "" ? "Not available" : String(value);
+  if(className) el.className = className;
+  parent.appendChild(el);
+  return el;
+}
 
-  setText("metricScore",score);
-  setText("metricPassed",passed + "/" + total);
-  setText("metricIssues",issues);
-  setText("metricTotal",total);
-  setText("scoreNumber",score);
-  setText("pageTitle",data.brandTitle);
-  setText("mainHeading",data.mainHeading);
-  setText("metaDescription",data.metaDescription);
-  setText("canonicalUrl",data.canonicalUrl);
+function displayAudit(data){
+  audit.classList.remove("hidden");
 
-  document.getElementById("scoreRing").style.setProperty(
-    "--progress",(score * 3.6) + "deg"
-  );
+  const score = Math.max(0,Math.min(100,Number(data.score)||0));
+  document.getElementById("scoreNumber").textContent = score;
+  document.getElementById("scoreRing").style.setProperty("--score",score+"%");
+  document.getElementById("metricScore").textContent = score+"/100";
+  document.getElementById("scoreHeading").textContent =
+    score >= 80 ? "Strong technical signals" :
+    score >= 50 ? "Room to improve" : "More optimization needed";
 
-  const label = score >= 80 ? "Strong signal coverage" :
-    score >= 50 ? "Room to improve" : "Needs attention";
+  const checkEntries = Object.entries(data.checks || {});
+  const passed = checkEntries.filter(entry => entry[1] === true).length;
+  const opportunities = checkEntries.length - passed;
 
-  setText("scoreLabel",label);
+  document.getElementById("metricPassed").textContent = passed;
+  document.getElementById("metricOpportunities").textContent = opportunities;
+  document.getElementById("metricTotal").textContent = checkEntries.length;
+  document.getElementById("scannedUrl").textContent = data.scannedUrl || "";
+  document.getElementById("auditDate").textContent = formatDate(data.savedAt || data.scannedAt);
 
-  const date = data.scannedAt ? new Date(data.scannedAt) : new Date();
-  setText("scanDate","Scanned " + date.toLocaleString());
+  const info = document.getElementById("websiteInfo");
+  info.replaceChildren();
 
-  const checkGrid = document.getElementById("checkGrid");
-  checkGrid.replaceChildren();
-
-  entries.forEach(([key,label]) => {
-    const detected = checks[key] === true;
+  [
+    ["Page title",data.brandTitle],
+    ["Meta description",data.metaDescription],
+    ["Main heading",data.mainHeading],
+    ["Canonical URL",data.canonicalUrl]
+  ].forEach(([label,value]) => {
     const card = document.createElement("div");
-    card.className = "check";
-
-    const name = document.createElement("span");
-    name.className = "check-name";
-    name.textContent = label;
-
-    const state = document.createElement("span");
-    state.className = "check-state " + (detected ? "pass" : "fail");
-    state.textContent = detected ? "✓ Detected" : "○ Not detected";
-
-    card.append(name,state);
-    checkGrid.appendChild(card);
+    card.className = "info-card";
+    addText(card,"div",label,"info-label");
+    addText(card,"div",value || "Not detected","info-value");
+    info.appendChild(card);
   });
 
-  const list = document.getElementById("recommendationList");
+  const checksGrid = document.getElementById("checksGrid");
+  checksGrid.replaceChildren();
+
+  checkEntries.forEach(([key,passed]) => {
+    const card = document.createElement("div");
+    card.className = "check-card";
+    addText(card,"div",key.replace(/([A-Z])/g," $1"),"check-name");
+    addText(card,"div",passed ? "✓ Detected" : "○ Not detected",
+      "check-status "+(passed ? "good" : "bad"));
+    checksGrid.appendChild(card);
+  });
+
+  const list = document.getElementById("recommendations");
   list.replaceChildren();
 
-  const recommendations = Array.isArray(data.recommendations)
-    ? data.recommendations : [];
-
-  if (!recommendations.length) {
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.textContent = "No recommendations were returned by this scan.";
-    list.appendChild(empty);
-  } else {
-    recommendations.forEach((item,index) => {
-      const row = document.createElement("div");
-      row.className = "recommendation";
-
-      const priority = document.createElement("span");
-      priority.className = "priority";
-      priority.textContent = index === 0 ? "PRIORITY" : "REVIEW";
-
-      const text = document.createElement("div");
-      text.className = "rec-text";
-      text.textContent = item;
-
-      row.append(priority,text);
-      list.appendChild(row);
-    });
+  if(!data.recommendations || !data.recommendations.length){
+    addText(list,"li","No recommendations from these basic checks.");
+  }else{
+    data.recommendations.forEach(item => addText(list,"li",item));
   }
 
-  setText("disclaimer",
-    data.note ||
-    "This preliminary audit checks basic website signals. It does not measure actual visibility in AI systems."
-  );
+  document.getElementById("auditNote").textContent = data.note;
 }
+
+function formatDate(value){
+  if(!value) return "Date unavailable";
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleString();
+}
+
+function renderHistory(){
+  const history = readHistory();
+  const list = document.getElementById("historyList");
+  list.replaceChildren();
+
+  document.getElementById("historyCount").textContent = history.length+" SAVED";
+
+  if(!history.length){
+    addText(list,"div","Your completed scans will appear here.","empty");
+    return;
+  }
+
+  history.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "history-item";
+
+    const left = document.createElement("div");
+    left.style.minWidth = "0";
+
+    addText(left,"div",item.brandTitle || item.scannedUrl,"history-url");
+    addText(left,"div",item.scannedUrl,"history-date");
+    addText(left,"div",formatDate(item.savedAt),"history-date");
+
+    const actions = document.createElement("div");
+    actions.className = "history-actions";
+
+    const open = document.createElement("button");
+    open.textContent = "Open audit";
+    open.addEventListener("click",() => reopenAudit(item.id));
+
+    const remove = document.createElement("button");
+    remove.textContent = "Delete";
+    remove.addEventListener("click",() => deleteAudit(item.id));
+
+    actions.append(open,remove);
+    left.appendChild(actions);
+
+    const score = document.createElement("div");
+    score.className = "history-score";
+    score.textContent = (Number(item.score)||0)+"/100";
+
+    row.append(left,score);
+    list.appendChild(row);
+  });
+}
+
+function reopenAudit(id){
+  const item = readHistory().find(entry => entry.id === id);
+  if(!item) return;
+
+  currentAudit = item;
+  displayAudit(item);
+  statusBox.textContent = "Showing a saved audit. This does not run a new scan.";
+  document.getElementById("audit").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function deleteAudit(id){
+  const updated = readHistory().filter(item => item.id !== id);
+  writeHistory(updated);
+  renderHistory();
+  renderComparison();
+  statusBox.textContent = "Saved audit deleted.";
+}
+
+function clearHistory(){
+  const history = readHistory();
+  if(!history.length){
+    statusBox.textContent = "There is no saved history to clear.";
+    return;
+  }
+
+  if(!window.confirm("Delete all saved scan history from this browser?")){
+    return;
+  }
+
+  localStorage.removeItem(STORAGE_KEY);
+  renderHistory();
+  renderComparison();
+  statusBox.textContent = "All saved scan history has been cleared.";
+}
+
+function renderComparison(){
+  const history = readHistory();
+  const container = document.getElementById("comparisonContent");
+  container.replaceChildren();
+
+  if(history.length < 2){
+    addText(container,"div","Complete at least two scans to compare their scores.","empty");
+    return;
+  }
+
+  const newest = history[0];
+  const previous = history[1];
+  const difference = (Number(newest.score)||0) - (Number(previous.score)||0);
+
+  const grid = document.createElement("div");
+  grid.className = "compare-grid";
+
+  [newest,previous].forEach((item,index) => {
+    const card = document.createElement("div");
+    card.className = "compare-card";
+    addText(card,"div",index === 0 ? "LATEST SCAN" : "PREVIOUS SCAN","small-muted");
+    addText(card,"div",item.brandTitle || item.scannedUrl,"check-name");
+    addText(card,"div",(Number(item.score)||0)+"/100","compare-score");
+    addText(card,"div",formatDate(item.savedAt),"small-muted");
+    grid.appendChild(card);
+  });
+
+  container.appendChild(grid);
+
+  const message = document.createElement("p");
+  message.className = "change";
+
+  if(difference > 0){
+    message.classList.add("good");
+    message.textContent = "↑ Score improved by "+difference+" points since the previous saved scan.";
+  }else if(difference < 0){
+    message.classList.add("bad");
+    message.textContent = "↓ Score decreased by "+Math.abs(difference)+" points since the previous saved scan.";
+  }else{
+    message.textContent = "→ No score change between the two most recent saved scans.";
+  }
+
+  container.appendChild(message);
+  const note = document.createElement("p");
+  note.className = "small-muted";
+  note.textContent = "Comparison uses the two most recent saved audits, which may be for different websites.";
+  container.appendChild(note);
+}
+
+renderHistory();
+renderComparison();
 </script>
 </body>
 </html>
