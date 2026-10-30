@@ -581,11 +581,13 @@ async function saveAuditToCloud(record){
     if(error) throw error;
 
     return "Cloud backup saved successfully.";
-  }catch(error){
+
+    }catch(error){
     console.error("MENTION cloud save:",error);
     return "Browser history saved. Cloud backup unavailable.";
   }
-async function runScan(){
+
+  async function runScan(){
   const url = input.value.trim();
 
   if(!url){
