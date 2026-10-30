@@ -5,94 +5,577 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff">
-<title>Website Scanner — MENTION AI</title>
+<title>Audit Dashboard — MENTION AI</title>
 <style>
+:root {
+  --yellow:#ffd43b;
+  --pale:#fff8df;
+  --ink:#191919;
+  --muted:#858585;
+  --line:#eeeeea;
+  --green:#168653;
+  --red:#c45b42;
+  --bg:#fafaf8;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#fffdf6;color:#191919;font-family:Arial,sans-serif}
-header{padding:20px 6%;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:21px;font-weight:800}
-.logo span{color:#e5ad00}
-a{color:#222;text-decoration:none}
-main{max-width:850px;margin:65px auto;padding:20px}
-.tag{color:#a77d00;font-size:12px;font-weight:bold;letter-spacing:2px}
-h1{font-size:clamp(34px,7vw,58px);margin:15px 0}
-h1 span{color:#d9a600}
-.intro{color:#666;line-height:1.7}
-.panel{margin-top:35px;background:white;border:1px solid #eee;border-radius:20px;padding:25px;box-shadow:0 12px 35px #00000008}
-label{display:block;font-weight:bold;margin-bottom:12px}
-.inputrow{display:flex;gap:10px;flex-wrap:wrap}
-input{flex:1;min-width:180px;padding:16px;border:1px solid #ddd;border-radius:10px;font-size:15px}
-button{border:0;background:#ffd43b;padding:16px 24px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer}
-button:disabled{opacity:.5;cursor:wait}
-.note{font-size:12px;color:#888;margin-top:12px}
-#status{margin-top:20px;color:#806000;line-height:1.5}
-#results{display:none;margin-top:25px}
-.score{background:#fff7d9;padding:22px;border-radius:14px;margin-bottom:18px}
-.score strong{font-size:45px}
-.score small{color:#777}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
-.item{padding:15px;border:1px solid #eee;border-radius:12px;overflow-wrap:anywhere}
-.item b{display:block;margin-bottom:7px}
-.good{color:#16834a}
-.bad{color:#bd6b00}
-ul{padding-left:20px;line-height:1.8}
-footer{text-align:center;padding:35px;color:#888;font-size:12px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.topbar{
+  height:70px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+.logo{font-size:22px;font-weight:850;letter-spacing:-1px}
+.logo span{color:#e5ae00}
+.top-right{display:flex;align-items:center;gap:18px}
+.version{
+  background:var(--pale);
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+}
+.home-link{font-size:13px;color:#666}
+.layout{
+  display:grid;
+  grid-template-columns:225px minmax(0,1fr);
+  max-width:1500px;
+  margin:auto;
+  min-height:calc(100vh - 70px);
+}
+.sidebar{
+  padding:32px 18px;
+  background:#fff;
+  border-right:1px solid var(--line);
+}
+.side-label{
+  color:#aaa;
+  font-size:10px;
+  letter-spacing:1.5px;
+  font-weight:800;
+  padding:0 12px;
+  margin:10px 0 15px;
+}
+.side-link{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px 12px;
+  margin:4px 0;
+  border-radius:10px;
+  color:#666;
+  font-size:13px;
+}
+.side-link.active{
+  background:var(--pale);
+  color:#29220c;
+  font-weight:750;
+}
+.side-icon{width:20px;text-align:center}
+.side-note{
+  margin-top:45px;
+  background:#fff9e8;
+  border:1px solid #f5e9c2;
+  border-radius:13px;
+  padding:15px;
+  font-size:12px;
+  color:#78622b;
+  line-height:1.6;
+}
+main{padding:38px 4.5%;min-width:0}
+.eyebrow{
+  color:#a17a00;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:2px;
+}
+h1{
+  font-size:clamp(27px,4vw,38px);
+  letter-spacing:-1.5px;
+  margin:12px 0 7px;
+}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.6}
+.scanbar{
+  background:#fff;
+  border:1px solid var(--line);
+  padding:17px;
+  border-radius:15px;
+  margin:27px 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 5px 20px #00000004;
+}
+.scanbar input{
+  min-width:0;
+  flex:1;
+  padding:13px 14px;
+  border:1px solid #e5e5e5;
+  border-radius:9px;
+  outline:none;
+  font-size:14px;
+}
+.scanbar input:focus{border-color:#e4b51e}
+.primary{
+  border:0;
+  border-radius:9px;
+  padding:14px 20px;
+  background:var(--yellow);
+  color:#211b09;
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.primary:disabled{opacity:.55;cursor:wait}
+.status{
+  display:none;
+  padding:13px 16px;
+  margin:-12px 0 22px;
+  background:#fff8df;
+  color:#755900;
+  border-radius:10px;
+  font-size:13px;
+}
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:30px 0 15px;
+}
+.section-head h2{font-size:17px;margin:0;letter-spacing:-.3px}
+.muted{color:var(--muted);font-size:12px}
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.metric{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:19px;
+  min-width:0;
+  animation:rise .5s both;
+}
+.metric-label{color:#888;font-size:11px}
+.metric-value{
+  font-size:27px;
+  font-weight:850;
+  letter-spacing:-1px;
+  margin-top:12px;
+}
+.metric-foot{font-size:11px;color:#999;margin-top:5px}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:21px;
+  min-width:0;
+}
+.overview{
+  display:grid;
+  grid-template-columns:260px minmax(0,1fr);
+  gap:15px;
+}
+.score-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.score-ring{
+  width:165px;
+  height:165px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(var(--yellow) var(--progress,0%),#f0f0ec 0);
+  position:relative;
+  margin:14px 0;
+  transition:background 1s ease;
+}
+.score-ring:before{
+  content:"";
+  position:absolute;
+  width:135px;
+  height:135px;
+  border-radius:50%;
+  background:white;
+}
+.score-inner{position:relative;z-index:1}
+.score-number{font-size:42px;font-weight:850;letter-spacing:-2px}
+.score-outof{font-size:11px;color:#999}
+.score-title{font-size:13px;font-weight:800}
+.score-caption{font-size:11px;color:#999;margin-top:7px}
+.overview-info h3{font-size:17px;margin:2px 0 8px}
+.overview-info>p{font-size:13px;color:#888;line-height:1.6;margin:0 0 19px}
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.info-box{
+  background:#fafaf8;
+  border-radius:10px;
+  padding:13px;
+  min-width:0;
+}
+.info-box span{display:block;font-size:10px;color:#999;margin-bottom:7px}
+.info-box strong{
+  font-size:12px;
+  font-weight:650;
+  overflow-wrap:anywhere;
+  line-height:1.5;
+}
+.check-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+.check{
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  min-width:0;
+  animation:rise .4s both;
+}
+.check-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}
+.check-state{font-size:11px;white-space:nowrap;font-weight:750}
+.pass{color:var(--green)}
+.fail{color:#ad7a16}
+.recommendations{display:grid;gap:11px}
+.recommendation{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:11px;
+}
+.priority{
+  background:#fff4d0;
+  color:#876500;
+  border-radius:7px;
+  font-size:9px;
+  font-weight:850;
+  padding:6px 8px;
+  white-space:nowrap;
+}
+.rec-text{font-size:12px;line-height:1.6}
+.empty{
+  color:#888;
+  font-size:13px;
+  padding:20px;
+  text-align:center;
+}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.secondary{
+  border:1px solid #e5e5e5;
+  border-radius:9px;
+  padding:12px 16px;
+  background:white;
+  font-size:12px;
+  font-weight:750;
+}
+.disclaimer{
+  color:#999;
+  font-size:11px;
+  line-height:1.7;
+  margin-top:25px;
+}
+#results{display:none}
+#placeholder{
+  text-align:center;
+  padding:55px 15px;
+  border:1px dashed #e4e1d6;
+  border-radius:15px;
+  background:#fff;
+  color:#888;
+}
+.placeholder-icon{font-size:32px;margin-bottom:12px}
+#placeholder strong{display:block;color:#333;font-size:15px;margin-bottom:7px}
+footer{
+  text-align:center;
+  padding:30px 10px;
+  color:#aaa;
+  font-size:11px;
+}
+@keyframes rise{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:950px){
+  .layout{grid-template-columns:185px minmax(0,1fr)}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .overview{grid-template-columns:1fr}
+  .score-card{padding:24px}
+}
+@media(max-width:650px){
+  .topbar{height:60px;padding:0 17px}
+  .logo{font-size:20px}
+  .top-right{gap:10px}
+  .home-link{font-size:12px}
+  .layout{display:block}
+  .sidebar{display:none}
+  main{padding:28px 16px}
+  h1{font-size:30px}
+  .scanbar{display:grid;grid-template-columns:1fr;padding:13px}
+  .scanbar input{width:100%}
+  .primary{width:100%}
+  .metrics{gap:9px}
+  .metric{padding:14px}
+  .metric-value{font-size:23px}
+  .card{padding:16px}
+  .check-grid{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
+  .section-head{align-items:flex-start}
+  .version{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  body{background:white}
+  .topbar,.sidebar,.scanbar,.status,.actions,footer{display:none!important}
+  .layout{display:block}
+  main{padding:0}
+  #results{display:block!important}
+  .card,.metric{break-inside:avoid;box-shadow:none}
+  #placeholder{display:none!important}
+}
 </style>
 </head>
 <body>
-<header>
+
+<header class="topbar">
   <a class="logo" href="./">MENTION<span>.</span></a>
-  <a href="./">← Home</a>
+  <div class="top-right">
+    <span class="version">V0.3.0</span>
+    <a class="home-link" href="./">← Home</a>
+  </div>
 </header>
 
-<main>
-  <div class="tag">✳ WEBSITE INTELLIGENCE</div>
-  <h1>Discover how AI sees <span>your website.</span></h1>
-  <p class="intro">Run a preliminary website-readiness audit. Discover important website signals and get practical recommendations.</p>
+<div class="layout">
+<aside class="sidebar">
+  <div class="side-label">WORKSPACE</div>
+  <a class="side-link active" href="#dashboard"><span class="side-icon">◫</span> Audit dashboard</a>
+  <a class="side-link" href="#overview"><span class="side-icon">◉</span> Overview</a>
+  <a class="side-link" href="#checks"><span class="side-icon">✓</span> Website checks</a>
+  <a class="side-link" href="#recommendations"><span class="side-icon">✳</span> Recommendations</a>
+  <div class="side-note">
+    <strong>Visibility starts with clarity.</strong>
+    <p>Understand your website's technical signals before working on AI discoverability.</p>
+  </div>
+</aside>
 
-  <section class="panel">
-    <label for="website">Enter your website URL</label>
-    <div class="inputrow">
-      <input id="website" type="url" placeholder="https://example.com">
-      <button id="scan">Scan website ↗</button>
-    </div>
-    <p class="note">Only scan websites you are authorized to analyze. Results depend on publicly accessible website content.</p>
-    <div id="status" role="status"></div>
-    <div id="results"></div>
+<main id="dashboard">
+  <div class="eyebrow">✳ MENTION INTELLIGENCE</div>
+  <h1>Website audit dashboard</h1>
+  <p class="subtitle">Analyze your website's readiness signals and discover opportunities to improve.</p>
+
+  <section class="scanbar">
+    <input id="website" type="url" placeholder="https://yourwebsite.com" aria-label="Website URL">
+    <button class="primary" id="scan">Run new audit ↗</button>
   </section>
-</main>
 
-<footer>MENTION AI · Preliminary website-readiness audit</footer>
+  <div class="status" id="status" role="status" aria-live="polite"></div>
+
+  <div id="placeholder">
+    <div class="placeholder-icon">✳</div>
+    <strong>Your next insight starts here.</strong>
+    Enter a website address above and run your first audit.
+  </div>
+
+  <section id="results">
+    <div class="section-head" id="overview">
+      <h2>Audit overview</h2>
+      <span class="muted" id="scanDate">Latest scan</span>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Readiness score</div>
+        <div class="metric-value" id="metricScore">—</div>
+        <div class="metric-foot">Out of 100</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Checks detected</div>
+        <div class="metric-value" id="metricPassed">—</div>
+        <div class="metric-foot">Signals found</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Opportunities</div>
+        <div class="metric-value" id="metricIssues">—</div>
+        <div class="metric-foot">Items to review</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Checks performed</div>
+        <div class="metric-value" id="metricTotal">8</div>
+        <div class="metric-foot">Website signals</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Performance snapshot</h2>
+      <span class="muted">Based on this scan</span>
+    </div>
+
+    <div class="overview">
+      <div class="card score-card">
+        <div class="muted">WEBSITE READINESS</div>
+        <div class="score-ring" id="scoreRing">
+          <div class="score-inner">
+            <div class="score-number" id="scoreNumber">0</div>
+            <div class="score-outof">/ 100</div>
+          </div>
+        </div>
+        <div class="score-title" id="scoreLabel">Awaiting scan</div>
+        <div class="score-caption">Preliminary technical signal score</div>
+      </div>
+
+      <div class="card overview-info">
+        <h3>Website intelligence</h3>
+        <p>Information extracted from the publicly accessible webpage.</p>
+        <div class="info-grid">
+          <div class="info-box">
+            <span>PAGE TITLE</span>
+            <strong id="pageTitle">—</strong>
+          </div>
+          <div class="info-box">
+            <span>MAIN HEADING</span>
+            <strong id="mainHeading">—</strong>
+          </div>
+          <div class="info-box">
+            <span>META DESCRIPTION</span>
+            <strong id="metaDescription">—</strong>
+          </div>
+          <div class="info-box">
+            <span>CANONICAL URL</span>
+            <strong id="canonicalUrl">—</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" id="checks">
+      <h2>Website readiness checks</h2>
+      <span class="muted">8 signals</span>
+    </div>
+    <div class="card">
+      <div class="check-grid" id="checkGrid"></div>
+    </div>
+
+    <div class="section-head" id="recommendations">
+      <h2>Optimization opportunities</h2>
+      <span class="muted">Actionable next steps</span>
+    </div>
+    <div class="card">
+      <div class="recommendations" id="recommendationList"></div>
+    </div>
+
+    <div class="section-head">
+      <h2>Report actions</h2>
+    </div>
+    <div class="actions">
+      <button class="primary" id="pdf">Export audit PDF ↓</button>
+      <button class="secondary" id="again">Scan another website</button>
+    </div>
+
+    <p class="disclaimer" id="disclaimer">
+      This preliminary audit checks basic website signals. It does not measure actual mentions, citations, rankings or recommendations in ChatGPT, Gemini, Claude, Perplexity or other AI systems. A missing signal is not automatically a defect.
+    </p>
+  </section>
+  <footer>MENTION AI · Make AI notice you.</footer>
+</main>
+</div>
 
 <script>
 const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
 
 const input = document.getElementById("website");
-const button = document.getElementById("scan");
+const scanButton = document.getElementById("scan");
 const statusBox = document.getElementById("status");
 const results = document.getElementById("results");
+const placeholder = document.getElementById("placeholder");
 
-button.addEventListener("click", scan);
+const checkNames = {
+  pageTitle:"Page title",
+  metaDescription:"Meta description",
+  mainHeading:"Main heading",
+  canonicalUrl:"Canonical URL",
+  structuredData:"Structured data",
+  robotsTxt:"Robots.txt",
+  sitemap:"XML sitemap",
+  llmsTxt:"LLMs.txt"
+};
 
-async function scan() {
-  const url = input.value.trim();
+scanButton.addEventListener("click", runScan);
+input.addEventListener("keydown", event => {
+  if (event.key === "Enter") runScan();
+});
+
+document.getElementById("again").addEventListener("click", () => {
+  input.focus();
+  input.scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+document.getElementById("pdf").addEventListener("click", () => {
+  window.print();
+});
+
+function setStatus(message) {
+  statusBox.textContent = message;
+  statusBox.style.display = message ? "block" : "none";
+}
+
+function setText(id, value) {
+  document.getElementById(id).textContent = value || "Not detected";
+}
+
+async function runScan() {
+  let url = input.value.trim();
 
   if (!url) {
-    statusBox.textContent = "Please enter a website URL.";
+    setStatus("Please enter a website address.");
+    input.focus();
     return;
   }
 
-  button.disabled = true;
-  button.textContent = "Scanning...";
-  statusBox.textContent = "Analyzing publicly accessible website information...";
+  if (!/^https?:\/\//i.test(url)) {
+    url = "https://" + url;
+    input.value = url;
+  }
+
+  scanButton.disabled = true;
+  scanButton.textContent = "Scanning...";
+  setStatus("Connecting to website and checking public signals...");
   results.style.display = "none";
-  results.replaceChildren();
 
   try {
     const response = await fetch(API, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({url})
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({url})
     });
 
     const data = await response.json();
@@ -101,80 +584,102 @@ async function scan() {
       throw new Error(data.error || "The scan could not be completed.");
     }
 
-    showResults(data);
-    statusBox.textContent = "Website audit completed successfully.";
-  } catch (error) {
-    statusBox.textContent = error.message || "Something went wrong.";
+    renderDashboard(data);
+    placeholder.style.display = "none";
+    results.style.display = "block";
+    setStatus("✓ Audit completed successfully.");
+    results.scrollIntoView({behavior:"smooth",block:"start"});
+  } catch(error) {
+    setStatus(error.message || "Unable to complete the scan. Please try again.");
   } finally {
-    button.disabled = false;
-    button.textContent = "Scan website ↗";
+    scanButton.disabled = false;
+    scanButton.textContent = "Run new audit ↗";
   }
 }
 
-function addText(parent, tag, value, className) {
-  const element = document.createElement(tag);
-  element.textContent = value;
-  if (className) element.className = className;
-  parent.appendChild(element);
-  return element;
-}
+function renderDashboard(data) {
+  const checks = data.checks || {};
+  const entries = Object.entries(checkNames);
+  const passed = entries.filter(([key]) => checks[key] === true).length;
+  const total = entries.length;
+  const issues = total - passed;
+  const score = Math.max(0,Math.min(100,Number(data.score) || 0));
 
-function showResults(data) {
-  results.style.display = "block";
+  setText("metricScore",score);
+  setText("metricPassed",passed + "/" + total);
+  setText("metricIssues",issues);
+  setText("metricTotal",total);
+  setText("scoreNumber",score);
+  setText("pageTitle",data.brandTitle);
+  setText("mainHeading",data.mainHeading);
+  setText("metaDescription",data.metaDescription);
+  setText("canonicalUrl",data.canonicalUrl);
 
-  const score = document.createElement("div");
-  score.className = "score";
-  addText(score, "strong", data.score + "/100");
-  addText(score, "div", "Preliminary readiness score");
-  addText(score, "small", data.scannedUrl);
-  results.appendChild(score);
+  document.getElementById("scoreRing").style.setProperty(
+    "--progress",(score * 3.6) + "deg"
+  );
 
-  addText(results, "h3", "Website information");
+  const label = score >= 80 ? "Strong signal coverage" :
+    score >= 50 ? "Room to improve" : "Needs attention";
 
-  const info = document.createElement("div");
-  info.className = "grid";
+  setText("scoreLabel",label);
 
-  [
-    ["Page title", data.brandTitle],
-    ["Description", data.metaDescription],
-    ["Main heading", data.mainHeading],
-    ["Canonical URL", data.canonicalUrl]
-  ].forEach(([label, value]) => {
+  const date = data.scannedAt ? new Date(data.scannedAt) : new Date();
+  setText("scanDate","Scanned " + date.toLocaleString());
+
+  const checkGrid = document.getElementById("checkGrid");
+  checkGrid.replaceChildren();
+
+  entries.forEach(([key,label]) => {
+    const detected = checks[key] === true;
     const card = document.createElement("div");
-    card.className = "item";
-    addText(card, "b", label);
-    addText(card, "span", value);
-    info.appendChild(card);
+    card.className = "check";
+
+    const name = document.createElement("span");
+    name.className = "check-name";
+    name.textContent = label;
+
+    const state = document.createElement("span");
+    state.className = "check-state " + (detected ? "pass" : "fail");
+    state.textContent = detected ? "✓ Detected" : "○ Not detected";
+
+    card.append(name,state);
+    checkGrid.appendChild(card);
   });
 
-  results.appendChild(info);
-  addText(results, "h3", "Readiness checks");
+  const list = document.getElementById("recommendationList");
+  list.replaceChildren();
 
-  const checks = document.createElement("div");
-  checks.className = "grid";
+  const recommendations = Array.isArray(data.recommendations)
+    ? data.recommendations : [];
 
-  Object.entries(data.checks).forEach(([key, passed]) => {
-    const card = document.createElement("div");
-    card.className = "item";
-    addText(card, "b", key.replace(/([A-Z])/g, " $1"));
-    addText(card, "span", passed ? "✓ Detected" : "○ Not detected",
-      passed ? "good" : "bad");
-    checks.appendChild(card);
-  });
-
-  results.appendChild(checks);
-  addText(results, "h3", "Recommendations");
-
-  const list = document.createElement("ul");
-
-  if (!data.recommendations.length) {
-    addText(list, "li", "No recommendations from these basic checks.");
+  if (!recommendations.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "No recommendations were returned by this scan.";
+    list.appendChild(empty);
   } else {
-    data.recommendations.forEach(item => addText(list, "li", item));
+    recommendations.forEach((item,index) => {
+      const row = document.createElement("div");
+      row.className = "recommendation";
+
+      const priority = document.createElement("span");
+      priority.className = "priority";
+      priority.textContent = index === 0 ? "PRIORITY" : "REVIEW";
+
+      const text = document.createElement("div");
+      text.className = "rec-text";
+      text.textContent = item;
+
+      row.append(priority,text);
+      list.appendChild(row);
+    });
   }
 
-  results.appendChild(list);
-  addText(results, "p", data.note);
+  setText("disclaimer",
+    data.note ||
+    "This preliminary audit checks basic website signals. It does not measure actual visibility in AI systems."
+  );
 }
 </script>
 </body>
