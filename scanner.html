@@ -645,11 +645,13 @@ async function runScan(){
     const history = readHistory();
     history.unshift(record);
     writeHistory(history);
+    const cloudStatus = await saveAuditToCloud(record);
 
     renderHistory();
     renderComparison();
 
-    statusBox.textContent = "Audit completed and saved to your scan history.";
+    statusBox.textContent =
+  "Audit completed and saved to your scan history. " + cloudStatus;
     document.getElementById("audit").scrollIntoView({behavior:"smooth",block:"start"});
   }catch(error){
     statusBox.textContent = error.message || "Something went wrong. Please try again.";
