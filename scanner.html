@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Website Scanner — MENTION AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fffdf6;color:#191919;font-family:Arial,sans-serif}
+header{padding:20px 6%;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:21px;font-weight:800}
+.logo span{color:#e5ad00}
+a{color:#222;text-decoration:none}
+main{max-width:850px;margin:65px auto;padding:20px}
+.tag{color:#a77d00;font-size:12px;font-weight:bold;letter-spacing:2px}
+h1{font-size:clamp(34px,7vw,58px);margin:15px 0}
+h1 span{color:#d9a600}
+.intro{color:#666;line-height:1.7}
+.panel{margin-top:35px;background:white;border:1px solid #eee;border-radius:20px;padding:25px;box-shadow:0 12px 35px #00000008}
+label{display:block;font-weight:bold;margin-bottom:12px}
+.inputrow{display:flex;gap:10px;flex-wrap:wrap}
+input{flex:1;min-width:180px;padding:16px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+button{border:0;background:#ffd43b;padding:16px 24px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}
+.note{font-size:12px;color:#888;margin-top:12px}
+#status{margin-top:20px;color:#806000;line-height:1.5}
+#results{display:none;margin-top:25px}
+.score{background:#fff7d9;padding:22px;border-radius:14px;margin-bottom:18px}
+.score strong{font-size:45px}
+.score small{color:#777}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.item{padding:15px;border:1px solid #eee;border-radius:12px;overflow-wrap:anywhere}
+.item b{display:block;margin-bottom:7px}
+.good{color:#16834a}
+.bad{color:#bd6b00}
+ul{padding-left:20px;line-height:1.8}
+footer{text-align:center;padding:35px;color:#888;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="./">MENTION<span>.</span></a>
+  <a href="./">← Home</a>
+</header>
+
+<main>
+  <div class="tag">✳ WEBSITE INTELLIGENCE</div>
+  <h1>Discover how AI sees <span>your website.</span></h1>
+  <p class="intro">Run a preliminary website-readiness audit. Discover important website signals and get practical recommendations.</p>
+
+  <section class="panel">
+    <label for="website">Enter your website URL</label>
+    <div class="inputrow">
+      <input id="website" type="url" placeholder="https://example.com">
+      <button id="scan">Scan website ↗</button>
+    </div>
+    <p class="note">Only scan websites you are authorized to analyze. Results depend on publicly accessible website content.</p>
+    <div id="status" role="status"></div>
+    <div id="results"></div>
+  </section>
+</main>
+
+<footer>MENTION AI · Preliminary website-readiness audit</footer>
+
+<script>
+const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
+
+const input = document.getElementById("website");
+const button = document.getElementById("scan");
+const statusBox = document.getElementById("status");
+const results = document.getElementById("results");
+
+button.addEventListener("click", scan);
+
+async function scan() {
+  const url = input.value.trim();
+
+  if (!url) {
+    statusBox.textContent = "Please enter a website URL.";
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Scanning...";
+  statusBox.textContent = "Analyzing publicly accessible website information...";
+  results.style.display = "none";
+  results.replaceChildren();
+
+  try {
+    const response = await fetch(API, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({url})
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "The scan could not be completed.");
+    }
+
+    showResults(data);
+    statusBox.textContent = "Website audit completed successfully.";
+  } catch (error) {
+    statusBox.textContent = error.message || "Something went wrong.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Scan website ↗";
+  }
+}
+
+function addText(parent, tag, value, className) {
+  const element = document.createElement(tag);
+  element.textContent = value;
+  if (className) element.className = className;
+  parent.appendChild(element);
+  return element;
+}
+
+function showResults(data) {
+  results.style.display = "block";
+
+  const score = document.createElement("div");
+  score.className = "score";
+  addText(score, "strong", data.score + "/100");
+  addText(score, "div", "Preliminary readiness score");
+  addText(score, "small", data.scannedUrl);
+  results.appendChild(score);
+
+  addText(results, "h3", "Website information");
+
+  const info = document.createElement("div");
+  info.className = "grid";
+
+  [
+    ["Page title", data.brandTitle],
+    ["Description", data.metaDescription],
+    ["Main heading", data.mainHeading],
+    ["Canonical URL", data.canonicalUrl]
+  ].forEach(([label, value]) => {
+    const card = document.createElement("div");
+    card.className = "item";
+    addText(card, "b", label);
+    addText(card, "span", value);
+    info.appendChild(card);
+  });
+
+  results.appendChild(info);
+  addText(results, "h3", "Readiness checks");
+
+  const checks = document.createElement("div");
+  checks.className = "grid";
+
+  Object.entries(data.checks).forEach(([key, passed]) => {
+    const card = document.createElement("div");
+    card.className = "item";
+    addText(card, "b", key.replace(/([A-Z])/g, " $1"));
+    addText(card, "span", passed ? "✓ Detected" : "○ Not detected",
+      passed ? "good" : "bad");
+    checks.appendChild(card);
+  });
+
+  results.appendChild(checks);
+  addText(results, "h3", "Recommendations");
+
+  const list = document.createElement("ul");
+
+  if (!data.recommendations.length) {
+    addText(list, "li", "No recommendations from these basic checks.");
+  } else {
+    data.recommendations.forEach(item => addText(list, "li", item));
+  }
+
+  results.appendChild(list);
+  addText(results, "p", data.note);
+}
+</script>
+</body>
+</html>
