@@ -113,7 +113,6 @@ h1{
 .panel h2{
   font-size:17px;
   margin:0;
-  letter-spacing:-.3px;
 }
 .small-muted{font-size:11px;color:#999}
 .input-row{display:flex;gap:10px}
@@ -148,7 +147,6 @@ input:focus{border-color:#d7aa00}
   font-size:12px;
   font-weight:700;
 }
-.secondary:hover{background:#fff9e7}
 .status{
   font-size:12px;
   color:#967000;
@@ -168,21 +166,9 @@ input:focus{border-color:#d7aa00}
   border-radius:14px;
   padding:18px;
 }
-.metric-label{
-  color:#888;
-  font-size:11px;
-  margin-bottom:12px;
-}
-.metric-value{
-  font-size:27px;
-  font-weight:850;
-  letter-spacing:-1px;
-}
-.metric-note{
-  color:#999;
-  font-size:10px;
-  margin-top:6px;
-}
+.metric-label{color:#888;font-size:11px;margin-bottom:12px}
+.metric-value{font-size:27px;font-weight:850;letter-spacing:-1px}
+.metric-note{color:#999;font-size:10px;margin-top:6px}
 .score-layout{
   display:flex;
   align-items:center;
@@ -212,12 +198,7 @@ input:focus{border-color:#d7aa00}
 .score-outof{font-size:10px;color:#999}
 .score-description{flex:1;min-width:180px}
 .score-description h3{font-size:17px;margin:0 0 8px}
-.score-description p{
-  font-size:12px;
-  color:#888;
-  line-height:1.6;
-  margin:0;
-}
+.score-description p{font-size:12px;color:#888;line-height:1.6;margin:0}
 .grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -230,22 +211,14 @@ input:focus{border-color:#d7aa00}
   min-width:0;
 }
 .info-label{color:#999;font-size:10px;margin-bottom:8px}
-.info-value{
-  font-size:13px;
-  line-height:1.5;
-  overflow-wrap:anywhere;
-}
+.info-value{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
 .check-card{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
 }
-.check-name{
-  font-size:12px;
-  font-weight:700;
-  overflow-wrap:anywhere;
-}
+.check-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}
 .check-status{font-size:10px;font-weight:800;white-space:nowrap}
 .good{color:var(--green)}
 .bad{color:var(--red)}
@@ -273,19 +246,10 @@ input:focus{border-color:#d7aa00}
   align-items:center;
   gap:12px;
 }
-.history-url{
-  font-size:12px;
-  font-weight:800;
-  overflow-wrap:anywhere;
-}
+.history-url{font-size:12px;font-weight:800;overflow-wrap:anywhere}
 .history-date{font-size:10px;color:#999;margin-top:6px}
 .history-score{font-size:20px;font-weight:900;white-space:nowrap}
-.history-actions{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-top:9px;
-}
+.history-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
 .history-actions button{
   border:1px solid #e8e4d9;
   border-radius:7px;
@@ -294,11 +258,8 @@ input:focus{border-color:#d7aa00}
   font-size:10px;
   font-weight:700;
 }
-.compare-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
+.source-label{font-size:9px;color:#16834a;margin-top:5px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .compare-card{
   background:#fffaf0;
   border:1px solid #f2e9cd;
@@ -306,21 +267,9 @@ input:focus{border-color:#d7aa00}
   padding:16px;
 }
 .compare-score{font-size:30px;font-weight:900;margin:8px 0}
-.change{font-size:12px;font-weight:800}
-.empty{
-  color:#999;
-  text-align:center;
-  padding:25px 10px;
-  font-size:12px;
-  line-height:1.7;
-}
+.empty{color:#999;text-align:center;padding:25px 10px;font-size:12px;line-height:1.7}
 .hidden{display:none!important}
-.footer{
-  text-align:center;
-  color:#aaa;
-  font-size:10px;
-  padding:25px;
-}
+.footer{text-align:center;color:#aaa;font-size:10px;padding:25px}
 @media(max-width:850px){
   .layout{grid-template-columns:1fr}
   .sidebar{
@@ -349,9 +298,7 @@ input:focus{border-color:#d7aa00}
 }
 @media print{
   body{background:white}
-  .topbar,.sidebar,.scan-panel,.history-panel,.compare-panel,.no-print,.footer{
-    display:none!important;
-  }
+  .topbar,.sidebar,.scan-panel,.history-panel,.compare-panel,.no-print,.footer{display:none!important}
   .layout{display:block}
   .main{max-width:none;padding:0}
   .panel,.metric{box-shadow:none;break-inside:avoid}
@@ -363,7 +310,7 @@ input:focus{border-color:#d7aa00}
 
 <header class="topbar">
   <a class="logo" href="./">MENTION<span>.</span></a>
-  <div class="top-right">AI VISIBILITY INTELLIGENCE · V0.5.0</div>
+  <div class="top-right">AI VISIBILITY INTELLIGENCE · V0.6.0</div>
 </header>
 
 <div class="layout">
@@ -411,9 +358,7 @@ input:focus{border-color:#d7aa00}
           </div>
           <div class="score-description">
             <h3 id="scoreHeading">Website readiness</h3>
-            <p id="scoreSummary">
-              Preliminary technical website-readiness score based on the checks below.
-            </p>
+            <p id="scoreSummary">Preliminary technical website-readiness score based on the checks below.</p>
             <p class="small-muted" id="scannedUrl" style="margin-top:9px;overflow-wrap:anywhere"></p>
           </div>
         </div>
@@ -469,11 +414,15 @@ input:focus{border-color:#d7aa00}
         <h2>Scan history</h2>
         <span class="small-muted" id="historyCount">0 SAVED</span>
       </div>
+      <div class="small-muted" id="historyStatus" style="margin-bottom:12px">
+        Checking cloud history...
+      </div>
       <div id="historyList" class="history-list">
         <div class="empty">Your completed scans will appear here.</div>
       </div>
       <div class="no-print" style="margin-top:14px">
-        <button class="secondary" id="clearHistoryButton">Clear all history</button>
+        <button class="secondary" id="refreshCloudButton">Refresh cloud history</button>
+        <button class="secondary" id="clearHistoryButton">Clear local history</button>
       </div>
     </section>
 
@@ -499,14 +448,14 @@ input:focus{border-color:#d7aa00}
 <script>
 "use strict";
 
-/* MENTION configuration */
 const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
 const STORAGE_KEY = "mention_ai_scan_history_v1";
 const MAX_HISTORY = 30;
 
-/* Supabase is optional for scanning.
-   If cloud services fail, the scanner still works. */
 let supabaseClient = null;
+let currentAudit = null;
+let cloudUserId = null;
+let historyLoadInProgress = false;
 
 try{
   if(
@@ -523,15 +472,11 @@ try{
   console.error("MENTION Supabase initialization:",error);
 }
 
-/* Page elements */
 const input = document.getElementById("website");
 const scanButton = document.getElementById("scanButton");
 const statusBox = document.getElementById("status");
 const audit = document.getElementById("audit");
 
-let currentAudit = null;
-
-/* Button events */
 scanButton.addEventListener("click",runScan);
 
 input.addEventListener("keydown",event=>{
@@ -539,8 +484,7 @@ input.addEventListener("keydown",event=>{
 });
 
 document.getElementById("pdfButton").addEventListener(
-  "click",
-  ()=>window.print()
+  "click",()=>window.print()
 );
 
 document.getElementById("newScanButton").addEventListener("click",()=>{
@@ -549,11 +493,13 @@ document.getElementById("newScanButton").addEventListener("click",()=>{
 });
 
 document.getElementById("clearHistoryButton").addEventListener(
-  "click",
-  clearHistory
+  "click",clearHistory
 );
 
-/* Local history */
+document.getElementById("refreshCloudButton").addEventListener(
+  "click",loadCloudHistory
+);
+
 function readHistory(){
   try{
     const saved = JSON.parse(
@@ -584,18 +530,24 @@ function makeId(){
     Math.random().toString(36).slice(2,8);
 }
 
-/* Cloud backup.
-   This function never interrupts the website scan. */
+async function getCurrentUser(){
+  if(!supabaseClient) return null;
+
+  const {data,error} = await supabaseClient.auth.getUser();
+
+  if(error) throw error;
+
+  return data.user || null;
+}
+
+/* Save an audit and verify the returned database row. */
 async function saveAuditToCloud(record){
   try{
     if(!supabaseClient){
       return "Cloud backup is not configured.";
     }
 
-    const {data:{user},error:userError} =
-      await supabaseClient.auth.getUser();
-
-    if(userError) throw userError;
+    const user = await getCurrentUser();
 
     if(!user){
       return "Sign in to enable cloud backup.";
@@ -615,16 +567,113 @@ async function saveAuditToCloud(record){
     if(error) throw error;
 
     if(!data || !data.id){
-      throw new Error("The database did not confirm the saved record.");
+      throw new Error("Database did not confirm the saved record.");
     }
 
-    console.log("MENTION cloud backup verified:",data);
+    record.cloudId = data.id;
+    record.savedAt = data.created_at || record.savedAt;
+
+    const history = readHistory();
+    const index = history.findIndex(item=>item.id === record.id);
+
+    if(index !== -1){
+      history[index] = record;
+      writeHistory(history);
+    }
+
+    console.log("MENTION cloud save verified:",data);
 
     return "Cloud backup verified successfully.";
 
   }catch(error){
-    console.error("MENTION cloud backup error:",error);
+    console.error("MENTION cloud backup:",error);
     return "Cloud backup unavailable: " + error.message;
+  }
+}
+
+/* Retrieve cloud records. RLS restricts results to the signed-in user. */
+async function loadCloudHistory(){
+  if(!supabaseClient){
+    document.getElementById("historyStatus").textContent =
+      "Cloud history is not configured. Browser history remains available.";
+    return;
+  }
+
+  if(historyLoadInProgress) return;
+
+  historyLoadInProgress = true;
+
+  const historyStatus = document.getElementById("historyStatus");
+  historyStatus.textContent = "Loading your cloud history...";
+
+  try{
+    const user = await getCurrentUser();
+
+    if(!user){
+      cloudUserId = null;
+      historyStatus.textContent =
+        "Sign in to load cloud history. Browser history is available on this device.";
+      renderHistory();
+      return;
+    }
+
+    cloudUserId = user.id;
+
+    const {data,error} = await supabaseClient
+      .from("audits")
+      .select("id,user_id,website_url,score,result,created_at")
+      .order("created_at",{ascending:false})
+      .limit(MAX_HISTORY);
+
+    if(error) throw error;
+
+    const localHistory = readHistory();
+    const merged = new Map();
+
+    localHistory.forEach(record=>{
+      if(record.id){
+        merged.set(record.id,record);
+      }
+    });
+
+    (data || []).forEach(row=>{
+      if(!row.result || typeof row.result !== "object") return;
+
+      const record = {
+        ...row.result,
+        id:row.result.id || row.id,
+        cloudId:row.id,
+        scannedUrl:row.website_url,
+        score:row.score,
+        savedAt:row.created_at
+      };
+
+      merged.set(record.id,record);
+    });
+
+    const combined = Array.from(merged.values())
+      .sort((a,b)=>
+        new Date(b.savedAt || b.scannedAt || 0) -
+        new Date(a.savedAt || a.scannedAt || 0)
+      )
+      .slice(0,MAX_HISTORY);
+
+    writeHistory(combined);
+    renderHistory();
+    renderComparison();
+
+    historyStatus.textContent =
+      (data || []).length +
+      " cloud audits loaded. Browser and cloud history combined.";
+
+    console.log("MENTION cloud history loaded:",data);
+
+  }catch(error){
+    console.error("MENTION cloud history:",error);
+    historyStatus.textContent =
+      "Cloud history unavailable: " + error.message;
+  }finally{
+    historyLoadInProgress = false;
   }
 }
 
@@ -677,9 +726,7 @@ async function runScan(){
     }
 
     if(!response.ok || !data.success){
-      throw new Error(
-        data.error || "The scan could not be completed."
-      );
+      throw new Error(data.error || "The scan could not be completed.");
     }
 
     const record = {
@@ -701,11 +748,8 @@ async function runScan(){
     };
 
     currentAudit = record;
-
-    /* Show the audit immediately. */
     displayAudit(record);
 
-    /* Save browser history first. */
     const history = readHistory();
     history.unshift(record);
     writeHistory(history);
@@ -721,12 +765,12 @@ async function runScan(){
       block:"start"
     });
 
-    /* Cloud backup happens separately.
-       It cannot cancel or break the completed scan. */
     const cloudStatus = await saveAuditToCloud(record);
 
     statusBox.textContent =
       "Audit completed and saved to browser history. " + cloudStatus;
+
+    renderHistory();
 
   }catch(error){
     console.error("MENTION scan error:",error);
@@ -738,7 +782,6 @@ async function runScan(){
   }
 }
 
-/* Safe text rendering */
 function addText(parent,tag,value,className){
   const el = document.createElement(tag);
 
@@ -753,7 +796,6 @@ function addText(parent,tag,value,className){
   return el;
 }
 
-/* Display audit */
 function displayAudit(data){
   audit.classList.remove("hidden");
 
@@ -778,16 +820,13 @@ function displayAudit(data){
         : "More optimization needed";
 
   const checkEntries = Object.entries(data.checks || {});
-
   const passed = checkEntries.filter(
     entry=>entry[1] === true
   ).length;
 
-  const opportunities = checkEntries.length - passed;
-
   document.getElementById("metricPassed").textContent = passed;
   document.getElementById("metricOpportunities").textContent =
-    opportunities;
+    checkEntries.length-passed;
   document.getElementById("metricTotal").textContent =
     checkEntries.length;
 
@@ -808,10 +847,8 @@ function displayAudit(data){
   ].forEach(([label,value])=>{
     const card = document.createElement("div");
     card.className = "info-card";
-
     addText(card,"div",label,"info-label");
     addText(card,"div",value || "Not detected","info-value");
-
     info.appendChild(card);
   });
 
@@ -842,39 +879,26 @@ function displayAudit(data){
   const list = document.getElementById("recommendations");
   list.replaceChildren();
 
-  if(
-    !Array.isArray(data.recommendations) ||
-    !data.recommendations.length
-  ){
-    addText(
-      list,
-      "li",
-      "No recommendations from these basic checks."
-    );
+  if(!data.recommendations || !data.recommendations.length){
+    addText(list,"li","No recommendations from these basic checks.");
   }else{
-    data.recommendations.forEach(item=>{
-      addText(list,"li",item);
-    });
+    data.recommendations.forEach(item=>addText(list,"li",item));
   }
 
   document.getElementById("auditNote").textContent =
     data.note || "Preliminary technical website-readiness audit.";
 }
 
-/* Date formatting */
 function formatDate(value){
   if(!value) return "Date unavailable";
 
   const date = new Date(value);
 
-  if(Number.isNaN(date.getTime())){
-    return String(value);
-  }
+  if(Number.isNaN(date.getTime())) return String(value);
 
   return date.toLocaleString();
 }
 
-/* History display */
 function renderHistory(){
   const history = readHistory();
   const list = document.getElementById("historyList");
@@ -908,18 +932,14 @@ function renderHistory(){
       "history-url"
     );
 
-    addText(
-      left,
-      "div",
-      item.scannedUrl,
-      "history-date"
-    );
+    addText(left,"div",item.scannedUrl,"history-date");
+    addText(left,"div",formatDate(item.savedAt),"history-date");
 
     addText(
       left,
       "div",
-      formatDate(item.savedAt),
-      "history-date"
+      item.cloudId ? "☁ Cloud backed up" : "Device history",
+      "source-label"
     );
 
     const actions = document.createElement("div");
@@ -927,35 +947,26 @@ function renderHistory(){
 
     const open = document.createElement("button");
     open.textContent = "Open audit";
-    open.addEventListener("click",()=>{
-      reopenAudit(item.id);
-    });
+    open.addEventListener("click",()=>reopenAudit(item.id));
 
     const remove = document.createElement("button");
     remove.textContent = "Delete";
-    remove.addEventListener("click",()=>{
-      deleteAudit(item.id);
-    });
+    remove.addEventListener("click",()=>deleteAudit(item.id));
 
     actions.append(open,remove);
     left.appendChild(actions);
 
     const score = document.createElement("div");
     score.className = "history-score";
-    score.textContent =
-      (Number(item.score)||0)+"/100";
+    score.textContent = (Number(item.score)||0)+"/100";
 
     row.append(left,score);
     list.appendChild(row);
   });
 }
 
-/* Reopen saved audit */
 function reopenAudit(id){
-  const item = readHistory().find(
-    entry=>entry.id === id
-  );
-
+  const item = readHistory().find(entry=>entry.id === id);
   if(!item) return;
 
   currentAudit = item;
@@ -970,31 +981,69 @@ function reopenAudit(id){
   });
 }
 
-/* Delete one local audit */
-function deleteAudit(id){
-  const updated = readHistory().filter(
-    item=>item.id !== id
-  );
+/* Delete from cloud first when a cloud record exists. */
+async function deleteAudit(id){
+  const item = readHistory().find(entry=>entry.id === id);
+  if(!item) return;
 
-  writeHistory(updated);
-  renderHistory();
-  renderComparison();
+  if(!window.confirm(
+    item.cloudId
+      ? "Delete this audit from cloud history and this browser?"
+      : "Delete this audit from this browser?"
+  )){
+    return;
+  }
 
-  statusBox.textContent = "Saved browser audit deleted.";
+  try{
+    if(item.cloudId){
+      if(!supabaseClient){
+        throw new Error("Cloud connection is unavailable.");
+      }
+
+      const user = await getCurrentUser();
+
+      if(!user){
+        throw new Error("Sign in before deleting a cloud audit.");
+      }
+
+      const {error} = await supabaseClient
+        .from("audits")
+        .delete()
+        .eq("id",item.cloudId);
+
+      if(error) throw error;
+    }
+
+    const updated = readHistory().filter(entry=>entry.id !== id);
+    writeHistory(updated);
+
+    renderHistory();
+    renderComparison();
+
+    if(currentAudit && currentAudit.id === id){
+      currentAudit = null;
+      audit.classList.add("hidden");
+    }
+
+    statusBox.textContent = "Audit deleted.";
+
+  }catch(error){
+    console.error("MENTION delete audit:",error);
+    statusBox.textContent =
+      "Could not delete audit: " + error.message;
+  }
 }
 
-/* Clear local history */
 function clearHistory(){
   const history = readHistory();
 
   if(!history.length){
-    statusBox.textContent =
-      "There is no saved history to clear.";
+    statusBox.textContent = "There is no saved history to clear.";
     return;
   }
 
   if(!window.confirm(
-    "Delete all saved scan history from this browser?"
+    "Clear local browser history? Cloud records will remain in Supabase."
   )){
     return;
   }
@@ -1005,14 +1054,12 @@ function clearHistory(){
   renderComparison();
 
   statusBox.textContent =
-    "All saved browser history has been cleared.";
+    "Local browser history cleared. Cloud records were not deleted.";
 }
 
-/* Compare latest two audits */
 function renderComparison(){
   const history = readHistory();
-  const container =
-    document.getElementById("comparisonContent");
+  const container = document.getElementById("comparisonContent");
 
   container.replaceChildren();
 
@@ -1030,8 +1077,7 @@ function renderComparison(){
   const previous = history[1];
 
   const difference =
-    (Number(newest.score)||0) -
-    (Number(previous.score)||0);
+    (Number(newest.score)||0)-(Number(previous.score)||0);
 
   const grid = document.createElement("div");
   grid.className = "compare-grid";
@@ -1061,13 +1107,7 @@ function renderComparison(){
       "compare-score"
     );
 
-    addText(
-      card,
-      "div",
-      formatDate(item.savedAt),
-      "small-muted"
-    );
-
+    addText(card,"div",formatDate(item.savedAt),"small-muted");
     grid.appendChild(card);
   });
 
@@ -1079,16 +1119,13 @@ function renderComparison(){
   if(difference > 0){
     message.classList.add("good");
     message.textContent =
-      "↑ Score improved by "+difference+
-      " points since the previous saved scan.";
+      "↑ Score improved by "+difference+" points.";
   }else if(difference < 0){
     message.classList.add("bad");
     message.textContent =
-      "↓ Score decreased by "+Math.abs(difference)+
-      " points since the previous saved scan.";
+      "↓ Score decreased by "+Math.abs(difference)+" points.";
   }else{
-    message.textContent =
-      "→ No score change between the two most recent saved scans.";
+    message.textContent = "→ No score change between these audits.";
   }
 
   container.appendChild(message);
@@ -1101,10 +1138,27 @@ function renderComparison(){
   container.appendChild(note);
 }
 
-/* Initial dashboard */
+/* Initial display */
 renderHistory();
 renderComparison();
 
+/* Load cloud history after page initialization. */
+loadCloudHistory();
+
+/* Refresh history when authentication changes. */
+if(supabaseClient){
+  supabaseClient.auth.onAuthStateChange((event,session)=>{
+    if(event === "SIGNED_IN" || event === "TOKEN_REFRESHED"){
+      setTimeout(loadCloudHistory,0);
+    }
+
+    if(event === "SIGNED_OUT"){
+      cloudUserId = null;
+      document.getElementById("historyStatus").textContent =
+        "Signed out. Showing browser history on this device.";
+    }
+  });
+}
 </script>
 </body>
 </html>
