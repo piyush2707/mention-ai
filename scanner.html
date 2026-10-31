@@ -1,174 +1,262 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#17132d">
 <title>MENTION AI — Website Intelligence</title>
 <style>
 :root{
-  --yellow:#ffd43b;
-  --ink:#202020;
-  --muted:#777;
-  --line:#eeeae0;
-  --green:#16834a;
-  --red:#bd6b00;
+  --purple:#7955ed;
+  --magenta:#e84ca8;
+  --orange:#ff8748;
+  --blue:#3989f5;
+  --ink:#211d35;
+  --muted:#77748a;
+  --line:#ece9f4;
+  --surface:#fff;
+  --bg:#f7f6fb;
+  --green:#159b70;
+  --red:#e05c69;
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0;
-  background:#f8f8f6;
+  background:var(--bg);
   color:var(--ink);
   font-family:Inter,Arial,sans-serif;
 }
 button,input{font:inherit}
 button{cursor:pointer}
 .topbar{
-  height:70px;
-  background:white;
-  border-bottom:1px solid var(--line);
+  min-height:68px;
+  padding:12px 5%;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 5%;
+  gap:12px;
+  color:white;
+  background:#19152e;
+  border-bottom:1px solid #30294b;
 }
 .logo{
-  font-size:23px;
-  font-weight:900;
-  letter-spacing:-1px;
-  color:var(--ink);
+  color:white;
+  font-size:24px;
+  font-weight:950;
+  letter-spacing:-1.3px;
   text-decoration:none;
 }
-.logo span{color:#d7a900}
-.top-right{font-size:12px;color:#777}
+.logo span{color:#f05bab}
+.top-right{
+  color:#c9c2e1;
+  font-size:10px;
+  letter-spacing:1.2px;
+  text-align:right;
+}
 .layout{
   display:grid;
-  grid-template-columns:225px minmax(0,1fr);
-  min-height:calc(100vh - 70px);
+  grid-template-columns:220px minmax(0,1fr);
+  min-height:calc(100vh - 68px);
 }
 .sidebar{
-  background:white;
+  background:#fff;
   border-right:1px solid var(--line);
-  padding:28px 17px;
+  padding:26px 15px;
 }
 .side-label{
+  margin:8px 12px 15px;
+  color:#aaa5ba;
   font-size:10px;
-  color:#aaa;
-  font-weight:800;
+  font-weight:900;
   letter-spacing:1.5px;
-  margin:10px 12px 14px;
 }
 .nav{
   display:block;
-  padding:12px;
   margin:5px 0;
-  border-radius:10px;
-  color:#666;
-  font-size:13px;
+  padding:12px;
+  border-radius:12px;
+  color:#777287;
   text-decoration:none;
+  font-size:13px;
+  font-weight:700;
 }
-.nav.active,.nav:hover{
-  background:#fff6d7;
-  color:#725500;
+.nav:hover,.nav.active{
+  color:#7047db;
+  background:linear-gradient(100deg,#f1eaff,#fff0f8);
 }
 .main{
   width:100%;
-  max-width:1250px;
-  padding:35px;
+  max-width:1280px;
+  padding:32px;
   margin:auto;
 }
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:28px;
+  margin-bottom:22px;
+  border-radius:22px;
+  color:white;
+  background:linear-gradient(120deg,#6440d8 0%,#b444c7 48%,#ed5b9f 100%);
+  box-shadow:0 12px 35px #8b50d52b;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  width:230px;
+  height:230px;
+  right:-65px;
+  top:-100px;
+  border:35px solid #ffffff18;
+  border-radius:50%;
+}
 .eyebrow{
-  color:#a47d00;
-  font-size:11px;
-  font-weight:800;
+  font-size:10px;
+  font-weight:900;
   letter-spacing:2px;
+  color:#f4dfff;
 }
-h1{
-  font-size:clamp(27px,4vw,38px);
+.hero h1{
+  max-width:650px;
+  margin:12px 0 8px;
+  font-size:clamp(27px,4vw,39px);
   letter-spacing:-1.5px;
-  margin:10px 0;
 }
-.subtitle{
-  color:var(--muted);
-  font-size:14px;
+.hero p{
+  max-width:600px;
+  margin:0;
+  color:#f6eaff;
+  font-size:13px;
   line-height:1.7;
-  margin:0 0 25px;
+}
+.hero-tag{
+  display:inline-block;
+  margin-top:18px;
+  padding:8px 12px;
+  border:1px solid #ffffff55;
+  border-radius:30px;
+  background:#ffffff20;
+  font-size:10px;
+  font-weight:800;
 }
 .panel{
-  background:white;
+  padding:21px;
+  margin-bottom:20px;
   border:1px solid var(--line);
-  border-radius:17px;
-  padding:22px;
-  margin-bottom:22px;
-  box-shadow:0 5px 22px #00000005;
+  border-radius:18px;
+  background:white;
+  box-shadow:0 6px 24px #30204d08;
 }
 .panel-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
   gap:12px;
   margin-bottom:17px;
 }
-.panel h2{
-  font-size:17px;
-  margin:0;
+.panel h2{margin:0;font-size:16px;letter-spacing:-.3px}
+.small-muted{font-size:10px;color:#9995a8}
+.scan-panel{
+  border-top:4px solid var(--purple);
 }
-.small-muted{font-size:11px;color:#999}
 .input-row{display:flex;gap:10px}
 input{
   width:100%;
   min-width:0;
-  border:1px solid #e5e2d9;
-  background:#fff;
   padding:15px;
-  border-radius:10px;
+  border:1px solid #e4e0ed;
+  border-radius:12px;
   outline:none;
+  background:#fcfbff;
+  color:var(--ink);
   font-size:14px;
 }
-input:focus{border-color:#d7aa00}
+input:focus{border-color:var(--purple);box-shadow:0 0 0 3px #7955ed18}
 .primary{
+  padding:14px 20px;
   border:0;
-  border-radius:10px;
-  padding:14px 21px;
-  background:var(--yellow);
-  color:#292300;
-  font-size:13px;
-  font-weight:800;
+  border-radius:12px;
+  color:white;
+  background:linear-gradient(110deg,var(--purple),var(--magenta));
+  font-size:12px;
+  font-weight:900;
   white-space:nowrap;
+  box-shadow:0 5px 15px #8b50d52b;
 }
 .primary:disabled{opacity:.5;cursor:wait}
 .secondary{
-  border:1px solid #e8e4d9;
+  padding:10px 13px;
+  border:1px solid #e7e2f0;
+  border-radius:10px;
+  color:#5f5578;
   background:white;
-  color:#444;
-  padding:10px 14px;
-  border-radius:9px;
-  font-size:12px;
-  font-weight:700;
+  font-size:11px;
+  font-weight:800;
 }
+.secondary:hover{background:#f7f2ff}
+.danger{color:#d34e66}
 .status{
-  font-size:12px;
-  color:#967000;
   margin-top:12px;
+  color:#8065b5;
+  font-size:11px;
   line-height:1.6;
+}
+.account-panel{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  border-left:4px solid var(--blue);
+}
+.account-email{
+  margin-top:5px;
+  color:#777287;
+  font-size:11px;
   overflow-wrap:anywhere;
 }
 .metrics{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:13px;
-  margin-bottom:22px;
+  gap:12px;
+  margin-bottom:20px;
 }
 .metric{
-  background:white;
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  padding:17px;
   border:1px solid var(--line);
-  border-radius:14px;
-  padding:18px;
+  border-radius:16px;
+  background:white;
+  box-shadow:0 5px 18px #30204d08;
 }
-.metric-label{color:#888;font-size:11px;margin-bottom:12px}
-.metric-value{font-size:27px;font-weight:850;letter-spacing:-1px}
-.metric-note{color:#999;font-size:10px;margin-top:6px}
+.metric:after{
+  content:"";
+  position:absolute;
+  width:65px;
+  height:65px;
+  right:-25px;
+  bottom:-30px;
+  border-radius:50%;
+  background:var(--accent,#7955ed);
+  opacity:.12;
+}
+.metric:nth-child(1){--accent:var(--purple);border-top:3px solid var(--purple)}
+.metric:nth-child(2){--accent:var(--blue);border-top:3px solid var(--blue)}
+.metric:nth-child(3){--accent:var(--orange);border-top:3px solid var(--orange)}
+.metric:nth-child(4){--accent:var(--magenta);border-top:3px solid var(--magenta)}
+.metric-label{color:#858094;font-size:10px;margin-bottom:12px}
+.metric-value{font-size:26px;font-weight:950;letter-spacing:-1px}
+.metric-note{margin-top:5px;color:#aaa5b5;font-size:9px}
+.score-panel{
+  color:white;
+  background:linear-gradient(120deg,#211a3e,#33215d 65%,#57358c);
+  border:0;
+}
+.score-panel .small-muted{color:#c9b9e9}
 .score-layout{
   display:flex;
   align-items:center;
@@ -176,129 +264,160 @@ input:focus{border-color:#d7aa00}
   flex-wrap:wrap;
 }
 .score-ring{
-  width:125px;
-  height:125px;
-  border-radius:50%;
-  background:conic-gradient(var(--yellow) var(--score,0%),#f0eee8 0);
+  width:130px;
+  height:130px;
+  flex-shrink:0;
   display:grid;
   place-items:center;
-  flex-shrink:0;
+  border-radius:50%;
+  background:conic-gradient(#ff79b9 var(--score,0%),#ffffff24 0);
 }
 .score-inner{
-  width:99px;
-  height:99px;
-  border-radius:50%;
-  background:white;
+  width:101px;
+  height:101px;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
+  border-radius:50%;
+  background:#292047;
 }
-.score-number{font-size:30px;font-weight:900}
-.score-outof{font-size:10px;color:#999}
+.score-number{font-size:31px;font-weight:950}
+.score-outof{font-size:9px;color:#c9b9e9}
 .score-description{flex:1;min-width:180px}
-.score-description h3{font-size:17px;margin:0 0 8px}
-.score-description p{font-size:12px;color:#888;line-height:1.6;margin:0}
+.score-description h3{margin:0 0 8px;font-size:18px}
+.score-description p{margin:0;color:#d1c8e5;font-size:11px;line-height:1.7}
+#scannedUrl{margin-top:8px;overflow-wrap:anywhere}
 .grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  gap:11px;
 }
 .info-card,.check-card{
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:15px;
   min-width:0;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fdfcff;
 }
-.info-label{color:#999;font-size:10px;margin-bottom:8px}
-.info-value{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.info-card:nth-child(4n+1){background:#f7f2ff}
+.info-card:nth-child(4n+2){background:#fff2f8}
+.info-card:nth-child(4n+3){background:#eff6ff}
+.info-card:nth-child(4n+4){background:#fff5ed}
+.info-label{margin-bottom:8px;color:#9690a5;font-size:10px}
+.info-value{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
 .check-card{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:10px;
 }
-.check-name{font-size:12px;font-weight:700;overflow-wrap:anywhere}
-.check-status{font-size:10px;font-weight:800;white-space:nowrap}
+.check-name{font-size:11px;font-weight:800;overflow-wrap:anywhere}
+.check-status{font-size:10px;font-weight:900;white-space:nowrap}
 .good{color:var(--green)}
 .bad{color:var(--red)}
 .recommendations{
-  padding-left:19px;
-  color:#555;
-  font-size:13px;
-  line-height:1.8;
+  padding-left:20px;
+  color:#615c70;
+  font-size:12px;
+  line-height:1.9;
 }
 .note{
-  color:#999;
-  font-size:11px;
-  line-height:1.7;
+  margin-top:16px;
+  padding-top:13px;
   border-top:1px solid var(--line);
-  padding-top:14px;
-  margin-top:18px;
+  color:#9994a7;
+  font-size:10px;
+  line-height:1.7;
 }
 .history-list{display:grid;gap:10px}
 .history-item{
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:14px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:12px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#fff;
 }
-.history-url{font-size:12px;font-weight:800;overflow-wrap:anywhere}
-.history-date{font-size:10px;color:#999;margin-top:6px}
-.history-score{font-size:20px;font-weight:900;white-space:nowrap}
+.history-left{min-width:0}
+.history-url{font-size:12px;font-weight:900;overflow-wrap:anywhere}
+.history-date{margin-top:5px;color:#9994a7;font-size:10px;overflow-wrap:anywhere}
+.history-score{font-size:19px;font-weight:950;white-space:nowrap}
 .history-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
 .history-actions button{
-  border:1px solid #e8e4d9;
-  border-radius:7px;
+  padding:7px 9px;
+  border:1px solid #e8e2f1;
+  border-radius:8px;
   background:white;
-  padding:7px 10px;
+  color:#66558b;
   font-size:10px;
-  font-weight:700;
+  font-weight:800;
 }
-.source-label{font-size:9px;color:#16834a;margin-top:5px}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.history-actions button:hover{background:#f5efff}
+.filter-row{margin-bottom:13px}
+.filter-row input{padding:11px;font-size:12px}
+.compare-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 .compare-card{
-  background:#fffaf0;
-  border:1px solid #f2e9cd;
-  border-radius:12px;
   padding:16px;
+  border:1px solid #e9e2f4;
+  border-radius:14px;
+  background:linear-gradient(135deg,#f6f0ff,#fff4fa);
 }
-.compare-score{font-size:30px;font-weight:900;margin:8px 0}
-.empty{color:#999;text-align:center;padding:25px 10px;font-size:12px;line-height:1.7}
+.compare-score{margin:8px 0;font-size:29px;font-weight:950}
+.change{font-size:11px;font-weight:900;line-height:1.6}
+.empty{
+  padding:25px 10px;
+  color:#a19bad;
+  text-align:center;
+  font-size:11px;
+  line-height:1.7;
+}
+.chart-wrap{position:relative;width:100%;min-height:190px}
+#scoreChart{width:100%;height:190px;display:block}
 .hidden{display:none!important}
-.footer{text-align:center;color:#aaa;font-size:10px;padding:25px}
+.footer{
+  padding:24px;
+  color:#aaa5b5;
+  text-align:center;
+  font-size:10px;
+  line-height:1.8;
+}
 @media(max-width:850px){
   .layout{grid-template-columns:1fr}
   .sidebar{
     display:flex;
     gap:5px;
     overflow-x:auto;
-    padding:9px 13px;
+    padding:9px 12px;
     border-right:0;
     border-bottom:1px solid var(--line);
   }
   .side-label{display:none}
-  .nav{white-space:nowrap;margin:0;padding:10px}
-  .main{padding:22px 15px}
+  .nav{margin:0;padding:10px;white-space:nowrap}
+  .main{padding:20px 14px}
   .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:520px){
-  .topbar{height:60px;padding:0 17px}
-  .top-right{font-size:10px}
+  .topbar{min-height:58px;padding:10px 15px}
+  .top-right{max-width:150px;font-size:8px}
   .input-row{flex-direction:column}
   .input-row .primary{width:100%}
-  .grid{grid-template-columns:1fr}
-  .compare-grid{grid-template-columns:1fr}
+  .grid,.compare-grid{grid-template-columns:1fr}
+  .panel{padding:16px}
+  .hero{padding:22px}
   .history-item{align-items:flex-start}
-  .history-score{font-size:17px}
-  .panel{padding:17px}
+  .history-score{font-size:16px}
 }
 @media print{
   body{background:white}
-  .topbar,.sidebar,.scan-panel,.history-panel,.compare-panel,.no-print,.footer{display:none!important}
+  .topbar,.sidebar,.scan-panel,.account-panel,.history-panel,
+  .compare-panel,.analytics-panel,.no-print,.footer{display:none!important}
   .layout{display:block}
   .main{max-width:none;padding:0}
   .panel,.metric{box-shadow:none;break-inside:avoid}
@@ -310,137 +429,181 @@ input:focus{border-color:#d7aa00}
 
 <header class="topbar">
   <a class="logo" href="./">MENTION<span>.</span></a>
-  <div class="top-right">AI VISIBILITY INTELLIGENCE · V0.6.0</div>
+  <div class="top-right">A WE LVOX PRODUCT · V0.7.0</div>
 </header>
 
 <div class="layout">
-  <aside class="sidebar">
-    <div class="side-label">WORKSPACE</div>
-    <a class="nav active" href="#overview">▦ Overview</a>
-    <a class="nav" href="#scanner">⌕ New scan</a>
-    <a class="nav" href="#history">◷ Scan history</a>
-    <a class="nav" href="#comparison">⇄ Compare scans</a>
-  </aside>
+<aside class="sidebar">
+  <div class="side-label">WORKSPACE</div>
+  <a class="nav active" href="#overview">✦ Overview</a>
+  <a class="nav" href="#scanner">⌕ New scan</a>
+  <a class="nav" href="#analytics">▥ Analytics</a>
+  <a class="nav" href="#history">◷ Scan history</a>
+  <a class="nav" href="#comparison">⇄ Compare scans</a>
+</aside>
 
-  <main class="main" id="overview">
-    <div class="eyebrow">✳ WEBSITE INTELLIGENCE</div>
-    <h1>Your AI visibility workspace.</h1>
-    <p class="subtitle">
-      Audit website signals, track improvements, and keep your optimization work organized.
-    </p>
+<main class="main" id="overview">
 
-    <section class="panel scan-panel" id="scanner">
+  <section class="hero">
+    <div class="eyebrow">✳ WEBSITE INTELLIGENCE WORKSPACE</div>
+    <h1>Make your website impossible to ignore.</h1>
+    <p>Discover technical signals, uncover optimization opportunities, and track your website-readiness journey with MENTION.</p>
+    <span class="hero-tag">✦ AI-readiness technical audit</span>
+  </section>
+
+  <section class="panel account-panel">
+    <div>
+      <strong id="accountTitle">Your MENTION account</strong>
+      <div class="account-email" id="accountEmail">Checking account status...</div>
+    </div>
+    <button class="secondary" id="accountButton">Loading account...</button>
+  </section>
+
+  <section class="panel scan-panel" id="scanner">
+    <div class="panel-head">
+      <h2>✦ Run a website audit</h2>
+      <span class="small-muted">NEW SCAN</span>
+    </div>
+    <div class="input-row">
+      <input id="website" type="url" placeholder="https://example.com" autocomplete="url">
+      <button class="primary" id="scanButton">Scan website ↗</button>
+    </div>
+    <div class="status" id="status" role="status">Enter a website address to begin.</div>
+  </section>
+
+  <div id="audit" class="hidden">
+    <section class="panel score-panel">
       <div class="panel-head">
-        <h2>Run a website audit</h2>
-        <span class="small-muted">NEW SCAN</span>
+        <h2>Latest audit result</h2>
+        <span class="small-muted" id="auditDate"></span>
       </div>
-      <div class="input-row">
-        <input id="website" type="url" placeholder="https://example.com" autocomplete="url">
-        <button class="primary" id="scanButton">Scan website ↗</button>
-      </div>
-      <div class="status" id="status" role="status">
-        Enter a website address to begin.
+      <div class="score-layout">
+        <div class="score-ring" id="scoreRing">
+          <div class="score-inner">
+            <div class="score-number" id="scoreNumber">--</div>
+            <div class="score-outof">OUT OF 100</div>
+          </div>
+        </div>
+        <div class="score-description">
+          <h3 id="scoreHeading">Website readiness</h3>
+          <p id="scoreSummary">Preliminary technical website-readiness score.</p>
+          <p id="scannedUrl"></p>
+        </div>
       </div>
     </section>
 
-    <div id="audit" class="hidden">
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Latest audit</h2>
-          <span class="small-muted" id="auditDate"></span>
-        </div>
-        <div class="score-layout">
-          <div class="score-ring" id="scoreRing">
-            <div class="score-inner">
-              <div class="score-number" id="scoreNumber">--</div>
-              <div class="score-outof">OUT OF 100</div>
-            </div>
-          </div>
-          <div class="score-description">
-            <h3 id="scoreHeading">Website readiness</h3>
-            <p id="scoreSummary">Preliminary technical website-readiness score based on the checks below.</p>
-            <p class="small-muted" id="scannedUrl" style="margin-top:9px;overflow-wrap:anywhere"></p>
-          </div>
-        </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Readiness score</div>
+        <div class="metric-value" id="metricScore">--</div>
+        <div class="metric-note">Preliminary score</div>
       </div>
-
-      <div class="metrics">
-        <div class="metric">
-          <div class="metric-label">Readiness score</div>
-          <div class="metric-value" id="metricScore">--</div>
-          <div class="metric-note">Preliminary score</div>
-        </div>
-        <div class="metric">
-          <div class="metric-label">Checks detected</div>
-          <div class="metric-value" id="metricPassed">--</div>
-          <div class="metric-note">Signals found</div>
-        </div>
-        <div class="metric">
-          <div class="metric-label">Opportunities</div>
-          <div class="metric-value" id="metricOpportunities">--</div>
-          <div class="metric-note">Items to review</div>
-        </div>
-        <div class="metric">
-          <div class="metric-label">Checks performed</div>
-          <div class="metric-value" id="metricTotal">--</div>
-          <div class="metric-note">Technical checks</div>
-        </div>
+      <div class="metric">
+        <div class="metric-label">Checks detected</div>
+        <div class="metric-value" id="metricPassed">--</div>
+        <div class="metric-note">Signals found</div>
       </div>
-
-      <section class="panel">
-        <div class="panel-head"><h2>Website information</h2></div>
-        <div class="grid" id="websiteInfo"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head"><h2>Readiness checks</h2></div>
-        <div class="grid" id="checksGrid"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel-head"><h2>Optimization recommendations</h2></div>
-        <ul class="recommendations" id="recommendations"></ul>
-        <p class="note" id="auditNote"></p>
-      </section>
-
-      <div class="no-print" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px">
-        <button class="primary" id="pdfButton">Export audit PDF ↓</button>
-        <button class="secondary" id="newScanButton">Scan another website</button>
+      <div class="metric">
+        <div class="metric-label">Opportunities</div>
+        <div class="metric-value" id="metricOpportunities">--</div>
+        <div class="metric-note">Items to review</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Checks performed</div>
+        <div class="metric-value" id="metricTotal">--</div>
+        <div class="metric-note">Technical checks</div>
       </div>
     </div>
 
-    <section class="panel history-panel" id="history">
-      <div class="panel-head">
-        <h2>Scan history</h2>
-        <span class="small-muted" id="historyCount">0 SAVED</span>
-      </div>
-      <div class="small-muted" id="historyStatus" style="margin-bottom:12px">
-        Checking cloud history...
-      </div>
-      <div id="historyList" class="history-list">
-        <div class="empty">Your completed scans will appear here.</div>
-      </div>
-      <div class="no-print" style="margin-top:14px">
-        <button class="secondary" id="refreshCloudButton">Refresh cloud history</button>
-        <button class="secondary" id="clearHistoryButton">Clear local history</button>
-      </div>
+    <section class="panel">
+      <div class="panel-head"><h2>✦ Website information</h2></div>
+      <div class="grid" id="websiteInfo"></div>
     </section>
 
-    <section class="panel compare-panel" id="comparison">
-      <div class="panel-head">
-        <h2>Compare recent scans</h2>
-        <span class="small-muted">LATEST TWO AUDITS</span>
-      </div>
-      <div id="comparisonContent">
-        <div class="empty">Complete at least two scans to compare their scores.</div>
-      </div>
+    <section class="panel">
+      <div class="panel-head"><h2>✦ Readiness checks</h2></div>
+      <div class="grid" id="checksGrid"></div>
     </section>
 
-    <div class="footer">
-      MENTION AI · Make AI notice you.<br>
-      Technical website-readiness checks are not measurements of actual AI search visibility.
+    <section class="panel">
+      <div class="panel-head"><h2>✦ Optimization recommendations</h2></div>
+      <ul class="recommendations" id="recommendations"></ul>
+      <p class="note" id="auditNote"></p>
+    </section>
+
+    <div class="no-print" style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px">
+      <button class="primary" id="pdfButton">Export audit PDF ↓</button>
+      <button class="secondary" id="newScanButton">Scan another website</button>
     </div>
-  </main>
+  </div>
+
+  <section class="panel analytics-panel" id="analytics">
+    <div class="panel-head">
+      <h2>▥ Your audit analytics</h2>
+      <span class="small-muted">ACCOUNT OVERVIEW</span>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Total audits</div>
+        <div class="metric-value" id="totalAudits">0</div>
+        <div class="metric-note">Saved scans</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Unique websites</div>
+        <div class="metric-value" id="uniqueWebsites">0</div>
+        <div class="metric-note">Different domains</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Average score</div>
+        <div class="metric-value" id="averageScore">--</div>
+        <div class="metric-note">Across saved audits</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Latest score</div>
+        <div class="metric-value" id="latestScore">--</div>
+        <div class="metric-note">Most recent audit</div>
+      </div>
+    </div>
+    <div class="panel-head">
+      <h2>Score history</h2>
+      <span class="small-muted">LATEST 8 AUDITS</span>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="scoreChart" width="900" height="190"></canvas>
+    </div>
+  </section>
+
+  <section class="panel history-panel" id="history">
+    <div class="panel-head">
+      <h2>◷ Scan history</h2>
+      <span class="small-muted" id="historyCount">0 SAVED</span>
+    </div>
+    <div class="filter-row">
+      <input id="historyFilter" type="search" placeholder="Filter by website...">
+    </div>
+    <div id="historyList" class="history-list">
+      <div class="empty">Your completed scans will appear here.</div>
+    </div>
+    <div class="no-print" style="margin-top:14px">
+      <button class="secondary danger" id="clearHistoryButton">Clear device history</button>
+    </div>
+  </section>
+
+  <section class="panel compare-panel" id="comparison">
+    <div class="panel-head">
+      <h2>⇄ Compare recent scans</h2>
+      <span class="small-muted">LATEST TWO AUDITS</span>
+    </div>
+    <div id="comparisonContent">
+      <div class="empty">Complete at least two scans to compare their scores.</div>
+    </div>
+  </section>
+
+  <div class="footer">
+    MENTION AI · Make AI notice you.<br>
+    Technical website-readiness checks are not measurements of actual AI search visibility or rankings.
+  </div>
+</main>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -452,62 +615,27 @@ const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
 const STORAGE_KEY = "mention_ai_scan_history_v1";
 const MAX_HISTORY = 30;
 
+const $ = id => document.getElementById(id);
+
+const input = $("website");
+const scanButton = $("scanButton");
+const statusBox = $("status");
+const audit = $("audit");
+
 let supabaseClient = null;
+let currentUser = null;
+let cloudHistory = [];
 let currentAudit = null;
-let cloudUserId = null;
-let historyLoadInProgress = false;
 
-try{
-  if(
-    window.supabase &&
-    window.MENTION_SUPABASE_URL &&
-    window.MENTION_SUPABASE_KEY
-  ){
-    supabaseClient = window.supabase.createClient(
-      window.MENTION_SUPABASE_URL,
-      window.MENTION_SUPABASE_KEY
-    );
-  }
-}catch(error){
-  console.error("MENTION Supabase initialization:",error);
+function setStatus(message){
+  statusBox.textContent = message;
 }
-
-const input = document.getElementById("website");
-const scanButton = document.getElementById("scanButton");
-const statusBox = document.getElementById("status");
-const audit = document.getElementById("audit");
-
-scanButton.addEventListener("click",runScan);
-
-input.addEventListener("keydown",event=>{
-  if(event.key === "Enter") runScan();
-});
-
-document.getElementById("pdfButton").addEventListener(
-  "click",()=>window.print()
-);
-
-document.getElementById("newScanButton").addEventListener("click",()=>{
-  document.getElementById("scanner").scrollIntoView({behavior:"smooth"});
-  input.focus();
-});
-
-document.getElementById("clearHistoryButton").addEventListener(
-  "click",clearHistory
-);
-
-document.getElementById("refreshCloudButton").addEventListener(
-  "click",loadCloudHistory
-);
 
 function readHistory(){
   try{
-    const saved = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "[]"
-    );
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
     return Array.isArray(saved) ? saved : [];
   }catch(error){
-    console.error("MENTION history read:",error);
     return [];
   }
 }
@@ -520,194 +648,226 @@ function writeHistory(items){
     );
     return true;
   }catch(error){
-    console.error("MENTION history write:",error);
+    setStatus("Browser storage is unavailable. Your scan may not be saved on this device.");
     return false;
   }
 }
 
 function makeId(){
-  return Date.now().toString(36) +
-    Math.random().toString(36).slice(2,8);
+  return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
 }
 
-async function getCurrentUser(){
-  if(!supabaseClient) return null;
-
-  const {data,error} = await supabaseClient.auth.getUser();
-
-  if(error) throw error;
-
-  return data.user || null;
+function formatDate(value){
+  if(!value) return "Date unavailable";
+  const date = new Date(value);
+  if(Number.isNaN(date.getTime())) return String(value);
+  return date.toLocaleString();
 }
 
-/* Save an audit and verify the returned database row. */
-async function saveAuditToCloud(record){
+function addText(parent,tag,value,className){
+  const element = document.createElement(tag);
+  element.textContent =
+    value === null || value === undefined || value === ""
+      ? "Not available"
+      : String(value);
+  if(className) element.className = className;
+  parent.appendChild(element);
+  return element;
+}
+
+function getCombinedHistory(){
+  const local = readHistory().map(item => ({
+    ...item,
+    source:"device"
+  }));
+
+  const cloud = cloudHistory.map(item => ({
+    ...item,
+    source:"cloud"
+  }));
+
+  const combined = new Map();
+
+  local.forEach(item => {
+    combined.set("local-"+item.id,item);
+  });
+
+  cloud.forEach(item => {
+    combined.set("cloud-"+item.cloudId,item);
+  });
+
+  return Array.from(combined.values())
+    .sort((a,b) =>
+      new Date(b.savedAt || b.scannedAt || 0) -
+      new Date(a.savedAt || a.scannedAt || 0)
+    );
+}
+
+async function initSupabase(){
   try{
-    if(!supabaseClient){
-      return "Cloud backup is not configured.";
+    if(!window.supabase ||
+       !window.MENTION_SUPABASE_URL ||
+       !window.MENTION_SUPABASE_KEY){
+      throw new Error("Supabase configuration was not found.");
     }
 
-    const user = await getCurrentUser();
+    supabaseClient = window.supabase.createClient(
+      window.MENTION_SUPABASE_URL,
+      window.MENTION_SUPABASE_KEY
+    );
 
-    if(!user){
-      return "Sign in to enable cloud backup.";
-    }
-
-    const {data,error} = await supabaseClient
-      .from("audits")
-      .insert({
-        user_id:user.id,
-        website_url:record.scannedUrl,
-        score:record.score,
-        result:record
-      })
-      .select("id,created_at")
-      .single();
-
+    const {data,error} = await supabaseClient.auth.getSession();
     if(error) throw error;
 
-    if(!data || !data.id){
-      throw new Error("Database did not confirm the saved record.");
-    }
+    currentUser = data.session ? data.session.user : null;
+    await refreshAccount();
 
-    record.cloudId = data.id;
-    record.savedAt = data.created_at || record.savedAt;
-
-    const history = readHistory();
-    const index = history.findIndex(item=>item.id === record.id);
-
-    if(index !== -1){
-      history[index] = record;
-      writeHistory(history);
-    }
-
-    console.log("MENTION cloud save verified:",data);
-
-    return "Cloud backup verified successfully.";
+    supabaseClient.auth.onAuthStateChange((_event,session) => {
+      currentUser = session ? session.user : null;
+      cloudHistory = [];
+      refreshAccount();
+    });
 
   }catch(error){
-    console.error("MENTION cloud backup:",error);
-    return "Cloud backup unavailable: " + error.message;
+    console.error("MENTION account setup:",error);
+    currentUser = null;
+    cloudHistory = [];
+    refreshAccount();
   }
 }
 
-/* Retrieve cloud records. RLS restricts results to the signed-in user. */
-async function loadCloudHistory(){
+async function refreshAccount(){
+  $("accountTitle").textContent =
+    currentUser ? "Your MENTION account" : "Device workspace";
+
+  $("accountEmail").textContent =
+    currentUser
+      ? currentUser.email
+      : "Not signed in · Device history is available";
+
+  $("accountButton").textContent =
+    currentUser ? "Sign out" : "Go to login";
+
+  if(currentUser){
+    await loadCloudHistory();
+  }else{
+    cloudHistory = [];
+    renderAll();
+  }
+}
+
+async function accountAction(){
   if(!supabaseClient){
-    document.getElementById("historyStatus").textContent =
-      "Cloud history is not configured. Browser history remains available.";
+    window.location.href = "./";
     return;
   }
 
-  if(historyLoadInProgress) return;
+  if(currentUser){
+    const confirmed = window.confirm("Sign out of your MENTION account?");
+    if(!confirmed) return;
 
-  historyLoadInProgress = true;
-
-  const historyStatus = document.getElementById("historyStatus");
-  historyStatus.textContent = "Loading your cloud history...";
-
-  try{
-    const user = await getCurrentUser();
-
-    if(!user){
-      cloudUserId = null;
-      historyStatus.textContent =
-        "Sign in to load cloud history. Browser history is available on this device.";
-      renderHistory();
+    const {error} = await supabaseClient.auth.signOut();
+    if(error){
+      setStatus("Sign out failed: " + error.message);
       return;
     }
 
-    cloudUserId = user.id;
+    currentUser = null;
+    cloudHistory = [];
+    await refreshAccount();
+    setStatus("You have signed out. Device history remains on this browser.");
+  }else{
+    window.location.href = "./";
+  }
+}
 
+async function loadCloudHistory(){
+  if(!supabaseClient || !currentUser) return;
+
+  $("accountEmail").textContent =
+    currentUser.email + " · Loading cloud history...";
+
+  try{
     const {data,error} = await supabaseClient
       .from("audits")
       .select("id,user_id,website_url,score,result,created_at")
+      .eq("user_id",currentUser.id)
       .order("created_at",{ascending:false})
       .limit(MAX_HISTORY);
 
     if(error) throw error;
 
-    const localHistory = readHistory();
-    const merged = new Map();
+    cloudHistory = (data || []).map(row => ({
+      ...(row.result || {}),
+      id:"cloud-"+row.id,
+      cloudId:row.id,
+      scannedUrl:row.website_url || (row.result || {}).scannedUrl || "",
+      score:Number(row.score ?? (row.result || {}).score) || 0,
+      savedAt:row.created_at || (row.result || {}).savedAt,
+      source:"cloud"
+    }));
 
-    localHistory.forEach(record=>{
-      if(record.id){
-        merged.set(record.id,record);
-      }
-    });
-
-    (data || []).forEach(row=>{
-      if(!row.result || typeof row.result !== "object") return;
-
-      const record = {
-        ...row.result,
-        id:row.result.id || row.id,
-        cloudId:row.id,
-        scannedUrl:row.website_url,
-        score:row.score,
-        savedAt:row.created_at
-      };
-
-      merged.set(record.id,record);
-    });
-
-    const combined = Array.from(merged.values())
-      .sort((a,b)=>
-        new Date(b.savedAt || b.scannedAt || 0) -
-        new Date(a.savedAt || a.scannedAt || 0)
-      )
-      .slice(0,MAX_HISTORY);
-
-    writeHistory(combined);
-    renderHistory();
-    renderComparison();
-
-    historyStatus.textContent =
-      (data || []).length +
-      " cloud audits loaded. Browser and cloud history combined.";
-
-    console.log("MENTION cloud history loaded:",data);
+    $("accountEmail").textContent = currentUser.email + " · Cloud history connected";
+    renderAll();
 
   }catch(error){
     console.error("MENTION cloud history:",error);
-    historyStatus.textContent =
-      "Cloud history unavailable: " + error.message;
-  }finally{
-    historyLoadInProgress = false;
+    $("accountEmail").textContent =
+      currentUser.email + " · Cloud history unavailable";
+    setStatus("Cloud history could not be loaded. Device history is still available.");
+    renderAll();
   }
 }
 
-/* Main scanner */
+async function saveAuditToCloud(record){
+  if(!supabaseClient || !currentUser){
+    return "Sign in to enable cloud backup.";
+  }
+
+  try{
+    const {error} = await supabaseClient
+      .from("audits")
+      .insert({
+        user_id:currentUser.id,
+        website_url:record.scannedUrl,
+        score:record.score,
+        result:record
+      });
+
+    if(error) throw error;
+
+    await loadCloudHistory();
+    return "Cloud backup saved successfully.";
+
+  }catch(error){
+    console.error("MENTION cloud save:",error);
+    return "Device history saved. Cloud backup unavailable.";
+  }
+}
+
 async function runScan(){
   const url = input.value.trim();
 
   if(!url){
-    statusBox.textContent = "Please enter a website URL.";
+    setStatus("Please enter a website URL.");
     input.focus();
     return;
   }
 
   let parsed;
-
   try{
     parsed = new URL(url);
-
-    if(
-      parsed.protocol !== "https:" &&
-      parsed.protocol !== "http:"
-    ){
+    if(parsed.protocol !== "https:" && parsed.protocol !== "http:"){
       throw new Error("Use an HTTP or HTTPS website address.");
     }
   }catch(error){
-    statusBox.textContent =
-      error.message || "Enter a valid website URL, including https://";
+    setStatus(error.message || "Enter a valid website URL.");
     return;
   }
 
   scanButton.disabled = true;
   scanButton.textContent = "Scanning...";
-  statusBox.textContent =
-    "Analyzing publicly accessible website information...";
+  setStatus("Analyzing publicly accessible website information...");
   audit.classList.add("hidden");
 
   try{
@@ -717,13 +877,7 @@ async function runScan(){
       body:JSON.stringify({url:parsed.href})
     });
 
-    let data;
-
-    try{
-      data = await response.json();
-    }catch(error){
-      throw new Error("The scanner service returned an invalid response.");
-    }
+    const data = await response.json();
 
     if(!response.ok || !data.success){
       throw new Error(data.error || "The scan could not be completed.");
@@ -743,8 +897,7 @@ async function runScan(){
         ? data.recommendations
         : [],
       scannedAt:data.scannedAt || "",
-      note:data.note ||
-        "This is a preliminary technical website-readiness audit."
+      note:data.note || "This is a preliminary technical website-readiness audit."
     };
 
     currentAudit = record;
@@ -754,89 +907,46 @@ async function runScan(){
     history.unshift(record);
     writeHistory(history);
 
-    renderHistory();
-    renderComparison();
-
-    statusBox.textContent =
-      "Audit completed. Browser history saved. Checking cloud backup...";
-
-    document.getElementById("audit").scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
+    renderAll();
 
     const cloudStatus = await saveAuditToCloud(record);
+    renderAll();
 
-    statusBox.textContent =
-      "Audit completed and saved to browser history. " + cloudStatus;
-
-    renderHistory();
+    setStatus("Audit completed. " + cloudStatus);
+    audit.scrollIntoView({behavior:"smooth",block:"start"});
 
   }catch(error){
-    console.error("MENTION scan error:",error);
-    statusBox.textContent =
-      error.message || "Something went wrong. Please try again.";
+    console.error("MENTION scan:",error);
+    setStatus(error.message || "Something went wrong. Please try again.");
   }finally{
     scanButton.disabled = false;
     scanButton.textContent = "Scan website ↗";
   }
 }
 
-function addText(parent,tag,value,className){
-  const el = document.createElement(tag);
-
-  el.textContent =
-    value === null || value === undefined || value === ""
-      ? "Not available"
-      : String(value);
-
-  if(className) el.className = className;
-
-  parent.appendChild(el);
-  return el;
-}
-
 function displayAudit(data){
   audit.classList.remove("hidden");
 
-  const score = Math.max(
-    0,
-    Math.min(100,Number(data.score)||0)
-  );
+  const score = Math.max(0,Math.min(100,Number(data.score)||0));
+  $("scoreNumber").textContent = score;
+  $("scoreRing").style.setProperty("--score",score+"%");
+  $("metricScore").textContent = score+"/100";
 
-  document.getElementById("scoreNumber").textContent = score;
+  $("scoreHeading").textContent =
+    score >= 80 ? "Strong technical signals" :
+    score >= 50 ? "Room to improve" :
+    "More optimization needed";
 
-  document.getElementById("scoreRing")
-    .style.setProperty("--score",score+"%");
+  const entries = Object.entries(data.checks || {});
+  const passed = entries.filter(entry => entry[1] === true).length;
 
-  document.getElementById("metricScore").textContent =
-    score+"/100";
+  $("metricPassed").textContent = passed;
+  $("metricOpportunities").textContent = entries.length-passed;
+  $("metricTotal").textContent = entries.length;
+  $("scannedUrl").textContent = data.scannedUrl || "";
+  $("auditDate").textContent = formatDate(data.savedAt || data.scannedAt);
 
-  document.getElementById("scoreHeading").textContent =
-    score >= 80
-      ? "Strong technical signals"
-      : score >= 50
-        ? "Room to improve"
-        : "More optimization needed";
-
-  const checkEntries = Object.entries(data.checks || {});
-  const passed = checkEntries.filter(
-    entry=>entry[1] === true
-  ).length;
-
-  document.getElementById("metricPassed").textContent = passed;
-  document.getElementById("metricOpportunities").textContent =
-    checkEntries.length-passed;
-  document.getElementById("metricTotal").textContent =
-    checkEntries.length;
-
-  document.getElementById("scannedUrl").textContent =
-    data.scannedUrl || "";
-
-  document.getElementById("auditDate").textContent =
-    formatDate(data.savedAt || data.scannedAt);
-
-  const info = document.getElementById("websiteInfo");
+  const info = $("websiteInfo");
   info.replaceChildren();
 
   [
@@ -844,7 +954,7 @@ function displayAudit(data){
     ["Meta description",data.metaDescription],
     ["Main heading",data.mainHeading],
     ["Canonical URL",data.canonicalUrl]
-  ].forEach(([label,value])=>{
+  ].forEach(([label,value]) => {
     const card = document.createElement("div");
     card.className = "info-card";
     addText(card,"div",label,"info-label");
@@ -852,94 +962,84 @@ function displayAudit(data){
     info.appendChild(card);
   });
 
-  const checksGrid = document.getElementById("checksGrid");
+  const checksGrid = $("checksGrid");
   checksGrid.replaceChildren();
 
-  checkEntries.forEach(([key,passed])=>{
+  entries.forEach(([key,passed]) => {
     const card = document.createElement("div");
     card.className = "check-card";
-
     addText(
       card,
       "div",
       key.replace(/([A-Z])/g," $1"),
       "check-name"
     );
-
     addText(
       card,
       "div",
       passed ? "✓ Detected" : "○ Not detected",
-      "check-status " + (passed ? "good" : "bad")
+      "check-status "+(passed ? "good" : "bad")
     );
-
     checksGrid.appendChild(card);
   });
 
-  const list = document.getElementById("recommendations");
+  const list = $("recommendations");
   list.replaceChildren();
 
   if(!data.recommendations || !data.recommendations.length){
     addText(list,"li","No recommendations from these basic checks.");
   }else{
-    data.recommendations.forEach(item=>addText(list,"li",item));
+    data.recommendations.forEach(item => addText(list,"li",item));
   }
 
-  document.getElementById("auditNote").textContent =
-    data.note || "Preliminary technical website-readiness audit.";
-}
-
-function formatDate(value){
-  if(!value) return "Date unavailable";
-
-  const date = new Date(value);
-
-  if(Number.isNaN(date.getTime())) return String(value);
-
-  return date.toLocaleString();
+  $("auditNote").textContent = data.note || "";
 }
 
 function renderHistory(){
-  const history = readHistory();
-  const list = document.getElementById("historyList");
+  const history = getCombinedHistory();
+  const filter = $("historyFilter").value.trim().toLowerCase();
+  const filtered = history.filter(item =>
+    String(item.scannedUrl || "").toLowerCase().includes(filter) ||
+    String(item.brandTitle || "").toLowerCase().includes(filter)
+  );
 
+  const list = $("historyList");
   list.replaceChildren();
 
-  document.getElementById("historyCount").textContent =
-    history.length+" SAVED";
+  $("historyCount").textContent =
+    history.length + " SAVED · " +
+    history.filter(item => item.source === "cloud").length + " CLOUD";
 
-  if(!history.length){
+  if(!filtered.length){
     addText(
       list,
       "div",
-      "Your completed scans will appear here.",
+      history.length ? "No matching websites." : "Your completed scans will appear here.",
       "empty"
     );
     return;
   }
 
-  history.forEach(item=>{
+  filtered.forEach(item => {
     const row = document.createElement("div");
     row.className = "history-item";
 
     const left = document.createElement("div");
-    left.style.minWidth = "0";
+    left.className = "history-left";
 
-    addText(
-      left,
-      "div",
-      item.brandTitle || item.scannedUrl,
-      "history-url"
-    );
-
+    addText(left,"div",item.brandTitle || item.scannedUrl,"history-url");
     addText(left,"div",item.scannedUrl,"history-date");
-    addText(left,"div",formatDate(item.savedAt),"history-date");
-
     addText(
       left,
       "div",
-      item.cloudId ? "☁ Cloud backed up" : "Device history",
-      "source-label"
+      formatDate(item.savedAt),
+      "history-date"
+    );
+    addText(
+      left,
+      "div",
+      item.source === "cloud" ? "☁ Cloud backup" : "▣ This device",
+      "history-date"
     );
 
     const actions = document.createElement("div");
@@ -947,13 +1047,14 @@ function renderHistory(){
 
     const open = document.createElement("button");
     open.textContent = "Open audit";
-    open.addEventListener("click",()=>reopenAudit(item.id));
+    open.addEventListener("click",() => reopenAudit(item));
+    actions.appendChild(open);
 
     const remove = document.createElement("button");
     remove.textContent = "Delete";
-    remove.addEventListener("click",()=>deleteAudit(item.id));
+    remove.addEventListener("click",() => deleteAudit(item));
+    actions.appendChild(remove);
 
-    actions.append(open,remove);
     left.appendChild(actions);
 
     const score = document.createElement("div");
@@ -965,102 +1066,73 @@ function renderHistory(){
   });
 }
 
-function reopenAudit(id){
-  const item = readHistory().find(entry=>entry.id === id);
-  if(!item) return;
-
+function reopenAudit(item){
   currentAudit = item;
   displayAudit(item);
-
-  statusBox.textContent =
-    "Showing a saved audit. This does not run a new scan.";
-
-  document.getElementById("audit").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+  setStatus("Showing a saved audit. This does not run a new scan.");
+  audit.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
-/* Delete from cloud first when a cloud record exists. */
-async function deleteAudit(id){
-  const item = readHistory().find(entry=>entry.id === id);
-  if(!item) return;
+async function deleteAudit(item){
+  if(item.source === "cloud"){
+    if(!supabaseClient || !currentUser) return;
 
-  if(!window.confirm(
-    item.cloudId
-      ? "Delete this audit from cloud history and this browser?"
-      : "Delete this audit from this browser?"
-  )){
-    return;
-  }
+    if(!window.confirm("Delete this cloud audit from your account?")) return;
 
-  try{
-    if(item.cloudId){
-      if(!supabaseClient){
-        throw new Error("Cloud connection is unavailable.");
-      }
-
-      const user = await getCurrentUser();
-
-      if(!user){
-        throw new Error("Sign in before deleting a cloud audit.");
-      }
-
+    try{
       const {error} = await supabaseClient
         .from("audits")
         .delete()
-        .eq("id",item.cloudId);
+        .eq("id",item.cloudId)
+        .eq("user_id",currentUser.id);
 
       if(error) throw error;
+
+      cloudHistory = cloudHistory.filter(
+        entry => entry.cloudId !== item.cloudId
+      );
+
+      setStatus("Cloud audit deleted.");
+      renderAll();
+
+    }catch(error){
+      console.error("MENTION cloud delete:",error);
+      setStatus("Could not delete cloud audit: " + error.message);
     }
-
-    const updated = readHistory().filter(entry=>entry.id !== id);
-    writeHistory(updated);
-
-    renderHistory();
-    renderComparison();
-
-    if(currentAudit && currentAudit.id === id){
-      currentAudit = null;
-      audit.classList.add("hidden");
-    }
-
-    statusBox.textContent = "Audit deleted.";
-
-  }catch(error){
-    console.error("MENTION delete audit:",error);
-    statusBox.textContent =
-      "Could not delete audit: " + error.message;
+    return;
   }
+
+  if(!window.confirm("Delete this device audit?")) return;
+
+  const updated = readHistory().filter(
+    entry => entry.id !== item.id
+  );
+
+  writeHistory(updated);
+  setStatus("Device audit deleted.");
+  renderAll();
 }
 
 function clearHistory(){
   const history = readHistory();
 
   if(!history.length){
-    statusBox.textContent = "There is no saved history to clear.";
+    setStatus("There is no device history to clear.");
     return;
   }
 
-  if(!window.confirm(
-    "Clear local browser history? Cloud records will remain in Supabase."
-  )){
+  if(!window.confirm("Delete all device history from this browser? Cloud backups will not be deleted.")){
     return;
   }
 
   localStorage.removeItem(STORAGE_KEY);
-
-  renderHistory();
-  renderComparison();
-
-  statusBox.textContent =
-    "Local browser history cleared. Cloud records were not deleted.";
+  setStatus("Device history cleared. Cloud backups are unchanged.");
+  renderAll();
 }
 
 function renderComparison(){
-  const history = readHistory();
-  const container = document.getElementById("comparisonContent");
-
+  const history = getCombinedHistory();
+  const container = $("comparisonContent");
   container.replaceChildren();
 
   if(history.length < 2){
@@ -1075,14 +1147,13 @@ function renderComparison(){
 
   const newest = history[0];
   const previous = history[1];
-
   const difference =
-    (Number(newest.score)||0)-(Number(previous.score)||0);
+    (Number(newest.score)||0) - (Number(previous.score)||0);
 
   const grid = document.createElement("div");
   grid.className = "compare-grid";
 
-  [newest,previous].forEach((item,index)=>{
+  [newest,previous].forEach((item,index) => {
     const card = document.createElement("div");
     card.className = "compare-card";
 
@@ -1092,22 +1163,20 @@ function renderComparison(){
       index === 0 ? "LATEST SCAN" : "PREVIOUS SCAN",
       "small-muted"
     );
-
     addText(
       card,
       "div",
       item.brandTitle || item.scannedUrl,
       "check-name"
     );
-
     addText(
       card,
       "div",
       (Number(item.score)||0)+"/100",
       "compare-score"
     );
-
     addText(card,"div",formatDate(item.savedAt),"small-muted");
+
     grid.appendChild(card);
   });
 
@@ -1125,40 +1194,137 @@ function renderComparison(){
     message.textContent =
       "↓ Score decreased by "+Math.abs(difference)+" points.";
   }else{
-    message.textContent = "→ No score change between these audits.";
+    message.textContent = "→ No score change between the two latest audits.";
   }
 
   container.appendChild(message);
 
-  const note = document.createElement("p");
-  note.className = "small-muted";
-  note.textContent =
-    "Comparison uses the two most recent saved audits, which may be for different websites.";
-
-  container.appendChild(note);
+  addText(
+    container,
+    "p",
+    "Comparison uses the two most recent saved audits, which may be for different websites.",
+    "small-muted"
+  );
 }
 
-/* Initial display */
-renderHistory();
-renderComparison();
+function renderAnalytics(){
+  const history = getCombinedHistory();
+  const scores = history.map(item => Number(item.score)||0);
+  const unique = new Set(
+    history.map(item => {
+      try{
+        return new URL(item.scannedUrl).hostname;
+      }catch(error){
+        return item.scannedUrl;
+      }
+    })
+  );
 
-/* Load cloud history after page initialization. */
-loadCloudHistory();
+  $("totalAudits").textContent = history.length;
+  $("uniqueWebsites").textContent = unique.size;
+  $("averageScore").textContent = scores.length
+    ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length)
+    : "--";
+  $("latestScore").textContent = scores.length ? scores[0] : "--";
 
-/* Refresh history when authentication changes. */
-if(supabaseClient){
-  supabaseClient.auth.onAuthStateChange((event,session)=>{
-    if(event === "SIGNED_IN" || event === "TOKEN_REFRESHED"){
-      setTimeout(loadCloudHistory,0);
-    }
+  drawChart(history.slice(0,8).reverse());
+}
 
-    if(event === "SIGNED_OUT"){
-      cloudUserId = null;
-      document.getElementById("historyStatus").textContent =
-        "Signed out. Showing browser history on this device.";
-    }
+function drawChart(items){
+  const canvas = $("scoreChart");
+  const ctx = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0,0,width,height);
+
+  if(!items.length){
+    ctx.fillStyle = "#a19bad";
+    ctx.font = "16px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Your score history will appear here.",width/2,height/2);
+    return;
+  }
+
+  const left = 38;
+  const right = width-20;
+  const top = 18;
+  const bottom = height-32;
+  const chartHeight = bottom-top;
+  const chartWidth = right-left;
+
+  ctx.font = "11px Arial";
+  ctx.textAlign = "right";
+
+  [0,25,50,75,100].forEach(value => {
+    const y = bottom-(value/100)*chartHeight;
+    ctx.strokeStyle = "#eeeaf5";
+    ctx.beginPath();
+    ctx.moveTo(left,y);
+    ctx.lineTo(right,y);
+    ctx.stroke();
+
+    ctx.fillStyle = "#9994a7";
+    ctx.fillText(value,left-9,y+4);
+  });
+
+  const points = items.map((item,index) => ({
+    x: items.length === 1
+      ? left+chartWidth/2
+      : left+(index/(items.length-1))*chartWidth,
+    y: bottom-(Math.max(0,Math.min(100,Number(item.score)||0))/100)*chartHeight,
+    score:Math.max(0,Math.min(100,Number(item.score)||0))
+  }));
+
+  const gradient = ctx.createLinearGradient(left,top,right,bottom);
+  gradient.addColorStop(0,"#7955ed");
+  gradient.addColorStop(1,"#e84ca8");
+
+  ctx.beginPath();
+  points.forEach((point,index) => {
+    if(index === 0) ctx.moveTo(point.x,point.y);
+    else ctx.lineTo(point.x,point.y);
+  });
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 4;
+  ctx.lineJoin = "round";
+  ctx.stroke();
+
+  points.forEach(point => {
+    ctx.beginPath();
+    ctx.arc(point.x,point.y,5,0,Math.PI*2);
+    ctx.fillStyle = "#e84ca8";
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
   });
 }
+
+function renderAll(){
+  renderHistory();
+  renderComparison();
+  renderAnalytics();
+}
+
+scanButton.addEventListener("click",runScan);
+$("accountButton").addEventListener("click",accountAction);
+$("pdfButton").addEventListener("click",() => window.print());
+
+$("newScanButton").addEventListener("click",() => {
+  $("scanner").scrollIntoView({behavior:"smooth"});
+  input.focus();
+});
+
+$("clearHistoryButton").addEventListener("click",clearHistory);
+$("historyFilter").addEventListener("input",renderHistory);
+
+input.addEventListener("keydown",event => {
+  if(event.key === "Enter") runScan();
+});
+
+renderAll();
+initSupabase();
 </script>
 </body>
 </html>
