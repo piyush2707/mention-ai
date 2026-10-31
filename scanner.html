@@ -12,7 +12,6 @@
   --ink:#202020;
   --muted:#777;
   --line:#eeeae0;
-  --cream:#fffdf6;
   --green:#16834a;
   --red:#bd6b00;
 }
@@ -117,10 +116,7 @@ h1{
   letter-spacing:-.3px;
 }
 .small-muted{font-size:11px;color:#999}
-.input-row{
-  display:flex;
-  gap:10px;
-}
+.input-row{display:flex;gap:10px}
 input{
   width:100%;
   min-width:0;
@@ -157,7 +153,8 @@ input:focus{border-color:#d7aa00}
   font-size:12px;
   color:#967000;
   margin-top:12px;
-  line-height:1.5;
+  line-height:1.6;
+  overflow-wrap:anywhere;
 }
 .metrics{
   display:grid;
@@ -211,14 +208,16 @@ input:focus{border-color:#d7aa00}
   justify-content:center;
   flex-direction:column;
 }
-.score-number{
-  font-size:30px;
-  font-weight:900;
-}
+.score-number{font-size:30px;font-weight:900}
 .score-outof{font-size:10px;color:#999}
 .score-description{flex:1;min-width:180px}
 .score-description h3{font-size:17px;margin:0 0 8px}
-.score-description p{font-size:12px;color:#888;line-height:1.6;margin:0}
+.score-description p{
+  font-size:12px;
+  color:#888;
+  line-height:1.6;
+  margin:0;
+}
 .grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -230,11 +229,7 @@ input:focus{border-color:#d7aa00}
   padding:15px;
   min-width:0;
 }
-.info-label{
-  color:#999;
-  font-size:10px;
-  margin-bottom:8px;
-}
+.info-label{color:#999;font-size:10px;margin-bottom:8px}
 .info-value{
   font-size:13px;
   line-height:1.5;
@@ -251,11 +246,7 @@ input:focus{border-color:#d7aa00}
   font-weight:700;
   overflow-wrap:anywhere;
 }
-.check-status{
-  font-size:10px;
-  font-weight:800;
-  white-space:nowrap;
-}
+.check-status{font-size:10px;font-weight:800;white-space:nowrap}
 .good{color:var(--green)}
 .bad{color:var(--red)}
 .recommendations{
@@ -272,10 +263,7 @@ input:focus{border-color:#d7aa00}
   padding-top:14px;
   margin-top:18px;
 }
-.history-list{
-  display:grid;
-  gap:10px;
-}
+.history-list{display:grid;gap:10px}
 .history-item{
   border:1px solid var(--line);
   border-radius:12px;
@@ -290,16 +278,8 @@ input:focus{border-color:#d7aa00}
   font-weight:800;
   overflow-wrap:anywhere;
 }
-.history-date{
-  font-size:10px;
-  color:#999;
-  margin-top:6px;
-}
-.history-score{
-  font-size:20px;
-  font-weight:900;
-  white-space:nowrap;
-}
+.history-date{font-size:10px;color:#999;margin-top:6px}
+.history-score{font-size:20px;font-weight:900;white-space:nowrap}
 .history-actions{
   display:flex;
   gap:6px;
@@ -325,15 +305,8 @@ input:focus{border-color:#d7aa00}
   border-radius:12px;
   padding:16px;
 }
-.compare-score{
-  font-size:30px;
-  font-weight:900;
-  margin:8px 0;
-}
-.change{
-  font-size:12px;
-  font-weight:800;
-}
+.compare-score{font-size:30px;font-weight:900;margin:8px 0}
+.change{font-size:12px;font-weight:800}
 .empty{
   color:#999;
   text-align:center;
@@ -376,7 +349,9 @@ input:focus{border-color:#d7aa00}
 }
 @media print{
   body{background:white}
-  .topbar,.sidebar,.scan-panel,.history-panel,.compare-panel,.no-print,.footer{display:none!important}
+  .topbar,.sidebar,.scan-panel,.history-panel,.compare-panel,.no-print,.footer{
+    display:none!important;
+  }
   .layout{display:block}
   .main{max-width:none;padding:0}
   .panel,.metric{box-shadow:none;break-inside:avoid}
@@ -385,9 +360,10 @@ input:focus{border-color:#d7aa00}
 </style>
 </head>
 <body>
+
 <header class="topbar">
   <a class="logo" href="./">MENTION<span>.</span></a>
-  <div class="top-right">AI VISIBILITY INTELLIGENCE · V0.4.0</div>
+  <div class="top-right">AI VISIBILITY INTELLIGENCE · V0.5.0</div>
 </header>
 
 <div class="layout">
@@ -399,10 +375,12 @@ input:focus{border-color:#d7aa00}
     <a class="nav" href="#comparison">⇄ Compare scans</a>
   </aside>
 
-  <main class="main">
+  <main class="main" id="overview">
     <div class="eyebrow">✳ WEBSITE INTELLIGENCE</div>
     <h1>Your AI visibility workspace.</h1>
-    <p class="subtitle">Audit website signals, track improvements, and keep your optimization work organized.</p>
+    <p class="subtitle">
+      Audit website signals, track improvements, and keep your optimization work organized.
+    </p>
 
     <section class="panel scan-panel" id="scanner">
       <div class="panel-head">
@@ -413,7 +391,9 @@ input:focus{border-color:#d7aa00}
         <input id="website" type="url" placeholder="https://example.com" autocomplete="url">
         <button class="primary" id="scanButton">Scan website ↗</button>
       </div>
-      <div class="status" id="status" role="status">Enter a website address to begin.</div>
+      <div class="status" id="status" role="status">
+        Enter a website address to begin.
+      </div>
     </section>
 
     <div id="audit" class="hidden">
@@ -431,7 +411,9 @@ input:focus{border-color:#d7aa00}
           </div>
           <div class="score-description">
             <h3 id="scoreHeading">Website readiness</h3>
-            <p id="scoreSummary">Preliminary technical website-readiness score based on the checks below.</p>
+            <p id="scoreSummary">
+              Preliminary technical website-readiness score based on the checks below.
+            </p>
             <p class="small-muted" id="scannedUrl" style="margin-top:9px;overflow-wrap:anywhere"></p>
           </div>
         </div>
@@ -515,14 +497,33 @@ input:focus{border-color:#d7aa00}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./supabase-config.js"></script>
 <script>
+"use strict";
+
+/* MENTION configuration */
 const API = "https://mention-ai-scanner.piyushjoshi27077.workers.dev/";
-  const supabaseClient = window.supabase.createClient(
-  window.MENTION_SUPABASE_URL,
-  window.MENTION_SUPABASE_KEY
-);
 const STORAGE_KEY = "mention_ai_scan_history_v1";
 const MAX_HISTORY = 30;
 
+/* Supabase is optional for scanning.
+   If cloud services fail, the scanner still works. */
+let supabaseClient = null;
+
+try{
+  if(
+    window.supabase &&
+    window.MENTION_SUPABASE_URL &&
+    window.MENTION_SUPABASE_KEY
+  ){
+    supabaseClient = window.supabase.createClient(
+      window.MENTION_SUPABASE_URL,
+      window.MENTION_SUPABASE_KEY
+    );
+  }
+}catch(error){
+  console.error("MENTION Supabase initialization:",error);
+}
+
+/* Page elements */
 const input = document.getElementById("website");
 const scanButton = document.getElementById("scanButton");
 const statusBox = document.getElementById("status");
@@ -530,64 +531,105 @@ const audit = document.getElementById("audit");
 
 let currentAudit = null;
 
-scanButton.addEventListener("click", runScan);
-document.getElementById("pdfButton").addEventListener("click", () => window.print());
-document.getElementById("newScanButton").addEventListener("click", () => {
+/* Button events */
+scanButton.addEventListener("click",runScan);
+
+input.addEventListener("keydown",event=>{
+  if(event.key === "Enter") runScan();
+});
+
+document.getElementById("pdfButton").addEventListener(
+  "click",
+  ()=>window.print()
+);
+
+document.getElementById("newScanButton").addEventListener("click",()=>{
   document.getElementById("scanner").scrollIntoView({behavior:"smooth"});
   input.focus();
 });
-document.getElementById("clearHistoryButton").addEventListener("click", clearHistory);
 
+document.getElementById("clearHistoryButton").addEventListener(
+  "click",
+  clearHistory
+);
+
+/* Local history */
 function readHistory(){
   try{
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const saved = JSON.parse(
+      localStorage.getItem(STORAGE_KEY) || "[]"
+    );
     return Array.isArray(saved) ? saved : [];
   }catch(error){
+    console.error("MENTION history read:",error);
     return [];
   }
 }
 
 function writeHistory(items){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items.slice(0,MAX_HISTORY)));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(items.slice(0,MAX_HISTORY))
+    );
     return true;
   }catch(error){
-    statusBox.textContent = "This browser could not save scan history. Check browser storage settings.";
+    console.error("MENTION history write:",error);
     return false;
   }
 }
 
 function makeId(){
-  return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2,8);
 }
 
+/* Cloud backup.
+   This function never interrupts the website scan. */
 async function saveAuditToCloud(record){
   try{
+    if(!supabaseClient){
+      return "Cloud backup is not configured.";
+    }
+
     const {data:{user},error:userError} =
       await supabaseClient.auth.getUser();
 
     if(userError) throw userError;
-    if(!user) return "Sign in to enable cloud backup.";
 
-    const {error} = await supabaseClient
+    if(!user){
+      return "Sign in to enable cloud backup.";
+    }
+
+    const {data,error} = await supabaseClient
       .from("audits")
       .insert({
         user_id:user.id,
         website_url:record.scannedUrl,
         score:record.score,
         result:record
-      });
+      })
+      .select("id,created_at")
+      .single();
 
     if(error) throw error;
 
-    return "Cloud backup saved successfully.";
+    if(!data || !data.id){
+      throw new Error("The database did not confirm the saved record.");
+    }
 
-    }catch(error){
-    console.error("MENTION cloud save:",error);
-    return "Browser history saved. Cloud backup unavailable.";
+    console.log("MENTION cloud backup verified:",data);
+
+    return "Cloud backup verified successfully.";
+
+  }catch(error){
+    console.error("MENTION cloud backup error:",error);
+    return "Cloud backup unavailable: " + error.message;
   }
+}
 
-  async function runScan(){
+/* Main scanner */
+async function runScan(){
   const url = input.value.trim();
 
   if(!url){
@@ -597,19 +639,26 @@ async function saveAuditToCloud(record){
   }
 
   let parsed;
+
   try{
     parsed = new URL(url);
-    if(parsed.protocol !== "https:" && parsed.protocol !== "http:"){
+
+    if(
+      parsed.protocol !== "https:" &&
+      parsed.protocol !== "http:"
+    ){
       throw new Error("Use an HTTP or HTTPS website address.");
     }
   }catch(error){
-    statusBox.textContent = error.message || "Enter a valid website URL, including https://";
+    statusBox.textContent =
+      error.message || "Enter a valid website URL, including https://";
     return;
   }
 
   scanButton.disabled = true;
   scanButton.textContent = "Scanning...";
-  statusBox.textContent = "Analyzing publicly accessible website information...";
+  statusBox.textContent =
+    "Analyzing publicly accessible website information...";
   audit.classList.add("hidden");
 
   try{
@@ -619,10 +668,18 @@ async function saveAuditToCloud(record){
       body:JSON.stringify({url:parsed.href})
     });
 
-    const data = await response.json();
+    let data;
+
+    try{
+      data = await response.json();
+    }catch(error){
+      throw new Error("The scanner service returned an invalid response.");
+    }
 
     if(!response.ok || !data.success){
-      throw new Error(data.error || "The scan could not be completed.");
+      throw new Error(
+        data.error || "The scan could not be completed."
+      );
     }
 
     const record = {
@@ -635,61 +692,110 @@ async function saveAuditToCloud(record){
       mainHeading:data.mainHeading || "",
       canonicalUrl:data.canonicalUrl || "",
       checks:data.checks || {},
-      recommendations:Array.isArray(data.recommendations) ? data.recommendations : [],
+      recommendations:Array.isArray(data.recommendations)
+        ? data.recommendations
+        : [],
       scannedAt:data.scannedAt || "",
-      note:data.note || "This is a preliminary technical website-readiness audit."
+      note:data.note ||
+        "This is a preliminary technical website-readiness audit."
     };
 
     currentAudit = record;
+
+    /* Show the audit immediately. */
     displayAudit(record);
 
+    /* Save browser history first. */
     const history = readHistory();
     history.unshift(record);
     writeHistory(history);
-    const cloudStatus = await saveAuditToCloud(record);
 
     renderHistory();
     renderComparison();
 
     statusBox.textContent =
-  "Audit completed and saved to your scan history. " + cloudStatus;
-    document.getElementById("audit").scrollIntoView({behavior:"smooth",block:"start"});
+      "Audit completed. Browser history saved. Checking cloud backup...";
+
+    document.getElementById("audit").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+    /* Cloud backup happens separately.
+       It cannot cancel or break the completed scan. */
+    const cloudStatus = await saveAuditToCloud(record);
+
+    statusBox.textContent =
+      "Audit completed and saved to browser history. " + cloudStatus;
+
   }catch(error){
-    statusBox.textContent = error.message || "Something went wrong. Please try again.";
+    console.error("MENTION scan error:",error);
+    statusBox.textContent =
+      error.message || "Something went wrong. Please try again.";
   }finally{
     scanButton.disabled = false;
     scanButton.textContent = "Scan website ↗";
   }
 }
 
+/* Safe text rendering */
 function addText(parent,tag,value,className){
   const el = document.createElement(tag);
-  el.textContent = value === null || value === undefined || value === "" ? "Not available" : String(value);
+
+  el.textContent =
+    value === null || value === undefined || value === ""
+      ? "Not available"
+      : String(value);
+
   if(className) el.className = className;
+
   parent.appendChild(el);
   return el;
 }
 
+/* Display audit */
 function displayAudit(data){
   audit.classList.remove("hidden");
 
-  const score = Math.max(0,Math.min(100,Number(data.score)||0));
+  const score = Math.max(
+    0,
+    Math.min(100,Number(data.score)||0)
+  );
+
   document.getElementById("scoreNumber").textContent = score;
-  document.getElementById("scoreRing").style.setProperty("--score",score+"%");
-  document.getElementById("metricScore").textContent = score+"/100";
+
+  document.getElementById("scoreRing")
+    .style.setProperty("--score",score+"%");
+
+  document.getElementById("metricScore").textContent =
+    score+"/100";
+
   document.getElementById("scoreHeading").textContent =
-    score >= 80 ? "Strong technical signals" :
-    score >= 50 ? "Room to improve" : "More optimization needed";
+    score >= 80
+      ? "Strong technical signals"
+      : score >= 50
+        ? "Room to improve"
+        : "More optimization needed";
 
   const checkEntries = Object.entries(data.checks || {});
-  const passed = checkEntries.filter(entry => entry[1] === true).length;
+
+  const passed = checkEntries.filter(
+    entry=>entry[1] === true
+  ).length;
+
   const opportunities = checkEntries.length - passed;
 
   document.getElementById("metricPassed").textContent = passed;
-  document.getElementById("metricOpportunities").textContent = opportunities;
-  document.getElementById("metricTotal").textContent = checkEntries.length;
-  document.getElementById("scannedUrl").textContent = data.scannedUrl || "";
-  document.getElementById("auditDate").textContent = formatDate(data.savedAt || data.scannedAt);
+  document.getElementById("metricOpportunities").textContent =
+    opportunities;
+  document.getElementById("metricTotal").textContent =
+    checkEntries.length;
+
+  document.getElementById("scannedUrl").textContent =
+    data.scannedUrl || "";
+
+  document.getElementById("auditDate").textContent =
+    formatDate(data.savedAt || data.scannedAt);
 
   const info = document.getElementById("websiteInfo");
   info.replaceChildren();
@@ -699,150 +805,269 @@ function displayAudit(data){
     ["Meta description",data.metaDescription],
     ["Main heading",data.mainHeading],
     ["Canonical URL",data.canonicalUrl]
-  ].forEach(([label,value]) => {
+  ].forEach(([label,value])=>{
     const card = document.createElement("div");
     card.className = "info-card";
+
     addText(card,"div",label,"info-label");
     addText(card,"div",value || "Not detected","info-value");
+
     info.appendChild(card);
   });
 
   const checksGrid = document.getElementById("checksGrid");
   checksGrid.replaceChildren();
 
-  checkEntries.forEach(([key,passed]) => {
+  checkEntries.forEach(([key,passed])=>{
     const card = document.createElement("div");
     card.className = "check-card";
-    addText(card,"div",key.replace(/([A-Z])/g," $1"),"check-name");
-    addText(card,"div",passed ? "✓ Detected" : "○ Not detected",
-      "check-status "+(passed ? "good" : "bad"));
+
+    addText(
+      card,
+      "div",
+      key.replace(/([A-Z])/g," $1"),
+      "check-name"
+    );
+
+    addText(
+      card,
+      "div",
+      passed ? "✓ Detected" : "○ Not detected",
+      "check-status " + (passed ? "good" : "bad")
+    );
+
     checksGrid.appendChild(card);
   });
 
   const list = document.getElementById("recommendations");
   list.replaceChildren();
 
-  if(!data.recommendations || !data.recommendations.length){
-    addText(list,"li","No recommendations from these basic checks.");
+  if(
+    !Array.isArray(data.recommendations) ||
+    !data.recommendations.length
+  ){
+    addText(
+      list,
+      "li",
+      "No recommendations from these basic checks."
+    );
   }else{
-    data.recommendations.forEach(item => addText(list,"li",item));
+    data.recommendations.forEach(item=>{
+      addText(list,"li",item);
+    });
   }
 
-  document.getElementById("auditNote").textContent = data.note;
+  document.getElementById("auditNote").textContent =
+    data.note || "Preliminary technical website-readiness audit.";
 }
 
+/* Date formatting */
 function formatDate(value){
   if(!value) return "Date unavailable";
+
   const date = new Date(value);
-  if(Number.isNaN(date.getTime())) return String(value);
+
+  if(Number.isNaN(date.getTime())){
+    return String(value);
+  }
+
   return date.toLocaleString();
 }
 
+/* History display */
 function renderHistory(){
   const history = readHistory();
   const list = document.getElementById("historyList");
+
   list.replaceChildren();
 
-  document.getElementById("historyCount").textContent = history.length+" SAVED";
+  document.getElementById("historyCount").textContent =
+    history.length+" SAVED";
 
   if(!history.length){
-    addText(list,"div","Your completed scans will appear here.","empty");
+    addText(
+      list,
+      "div",
+      "Your completed scans will appear here.",
+      "empty"
+    );
     return;
   }
 
-  history.forEach(item => {
+  history.forEach(item=>{
     const row = document.createElement("div");
     row.className = "history-item";
 
     const left = document.createElement("div");
     left.style.minWidth = "0";
 
-    addText(left,"div",item.brandTitle || item.scannedUrl,"history-url");
-    addText(left,"div",item.scannedUrl,"history-date");
-    addText(left,"div",formatDate(item.savedAt),"history-date");
+    addText(
+      left,
+      "div",
+      item.brandTitle || item.scannedUrl,
+      "history-url"
+    );
+
+    addText(
+      left,
+      "div",
+      item.scannedUrl,
+      "history-date"
+    );
+
+    addText(
+      left,
+      "div",
+      formatDate(item.savedAt),
+      "history-date"
+    );
 
     const actions = document.createElement("div");
     actions.className = "history-actions";
 
     const open = document.createElement("button");
     open.textContent = "Open audit";
-    open.addEventListener("click",() => reopenAudit(item.id));
+    open.addEventListener("click",()=>{
+      reopenAudit(item.id);
+    });
 
     const remove = document.createElement("button");
     remove.textContent = "Delete";
-    remove.addEventListener("click",() => deleteAudit(item.id));
+    remove.addEventListener("click",()=>{
+      deleteAudit(item.id);
+    });
 
     actions.append(open,remove);
     left.appendChild(actions);
 
     const score = document.createElement("div");
     score.className = "history-score";
-    score.textContent = (Number(item.score)||0)+"/100";
+    score.textContent =
+      (Number(item.score)||0)+"/100";
 
     row.append(left,score);
     list.appendChild(row);
   });
 }
 
+/* Reopen saved audit */
 function reopenAudit(id){
-  const item = readHistory().find(entry => entry.id === id);
+  const item = readHistory().find(
+    entry=>entry.id === id
+  );
+
   if(!item) return;
 
   currentAudit = item;
   displayAudit(item);
-  statusBox.textContent = "Showing a saved audit. This does not run a new scan.";
-  document.getElementById("audit").scrollIntoView({behavior:"smooth",block:"start"});
+
+  statusBox.textContent =
+    "Showing a saved audit. This does not run a new scan.";
+
+  document.getElementById("audit").scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
 }
 
+/* Delete one local audit */
 function deleteAudit(id){
-  const updated = readHistory().filter(item => item.id !== id);
+  const updated = readHistory().filter(
+    item=>item.id !== id
+  );
+
   writeHistory(updated);
   renderHistory();
   renderComparison();
-  statusBox.textContent = "Saved audit deleted.";
+
+  statusBox.textContent = "Saved browser audit deleted.";
 }
 
+/* Clear local history */
 function clearHistory(){
   const history = readHistory();
+
   if(!history.length){
-    statusBox.textContent = "There is no saved history to clear.";
+    statusBox.textContent =
+      "There is no saved history to clear.";
     return;
   }
 
-  if(!window.confirm("Delete all saved scan history from this browser?")){
+  if(!window.confirm(
+    "Delete all saved scan history from this browser?"
+  )){
     return;
   }
 
   localStorage.removeItem(STORAGE_KEY);
+
   renderHistory();
   renderComparison();
-  statusBox.textContent = "All saved scan history has been cleared.";
+
+  statusBox.textContent =
+    "All saved browser history has been cleared.";
 }
 
+/* Compare latest two audits */
 function renderComparison(){
   const history = readHistory();
-  const container = document.getElementById("comparisonContent");
+  const container =
+    document.getElementById("comparisonContent");
+
   container.replaceChildren();
 
   if(history.length < 2){
-    addText(container,"div","Complete at least two scans to compare their scores.","empty");
+    addText(
+      container,
+      "div",
+      "Complete at least two scans to compare their scores.",
+      "empty"
+    );
     return;
   }
 
   const newest = history[0];
   const previous = history[1];
-  const difference = (Number(newest.score)||0) - (Number(previous.score)||0);
+
+  const difference =
+    (Number(newest.score)||0) -
+    (Number(previous.score)||0);
 
   const grid = document.createElement("div");
   grid.className = "compare-grid";
 
-  [newest,previous].forEach((item,index) => {
+  [newest,previous].forEach((item,index)=>{
     const card = document.createElement("div");
     card.className = "compare-card";
-    addText(card,"div",index === 0 ? "LATEST SCAN" : "PREVIOUS SCAN","small-muted");
-    addText(card,"div",item.brandTitle || item.scannedUrl,"check-name");
-    addText(card,"div",(Number(item.score)||0)+"/100","compare-score");
-    addText(card,"div",formatDate(item.savedAt),"small-muted");
+
+    addText(
+      card,
+      "div",
+      index === 0 ? "LATEST SCAN" : "PREVIOUS SCAN",
+      "small-muted"
+    );
+
+    addText(
+      card,
+      "div",
+      item.brandTitle || item.scannedUrl,
+      "check-name"
+    );
+
+    addText(
+      card,
+      "div",
+      (Number(item.score)||0)+"/100",
+      "compare-score"
+    );
+
+    addText(
+      card,
+      "div",
+      formatDate(item.savedAt),
+      "small-muted"
+    );
+
     grid.appendChild(card);
   });
 
@@ -853,23 +1078,33 @@ function renderComparison(){
 
   if(difference > 0){
     message.classList.add("good");
-    message.textContent = "↑ Score improved by "+difference+" points since the previous saved scan.";
+    message.textContent =
+      "↑ Score improved by "+difference+
+      " points since the previous saved scan.";
   }else if(difference < 0){
     message.classList.add("bad");
-    message.textContent = "↓ Score decreased by "+Math.abs(difference)+" points since the previous saved scan.";
+    message.textContent =
+      "↓ Score decreased by "+Math.abs(difference)+
+      " points since the previous saved scan.";
   }else{
-    message.textContent = "→ No score change between the two most recent saved scans.";
+    message.textContent =
+      "→ No score change between the two most recent saved scans.";
   }
 
   container.appendChild(message);
+
   const note = document.createElement("p");
   note.className = "small-muted";
-  note.textContent = "Comparison uses the two most recent saved audits, which may be for different websites.";
+  note.textContent =
+    "Comparison uses the two most recent saved audits, which may be for different websites.";
+
   container.appendChild(note);
 }
 
+/* Initial dashboard */
 renderHistory();
 renderComparison();
+
 </script>
 </body>
 </html>
