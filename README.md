@@ -8,6 +8,12 @@ It analyses publicly accessible website information, identifies technical signal
 
 «A Welvox product»
 
+
+<p align="center">
+  <img src="welvox-mention.png" 
+    </p>
+
+
 ---
 
 Project Information
