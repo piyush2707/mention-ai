@@ -1,0 +1,260 @@
+
+/* =========================================
+   MENTION — SOFT PREMIUM
+   Version 1.0
+   Welvox
+========================================= */
+
+:root {
+  --mp-bg: #faf9f7;
+  --mp-surface: #ffffff;
+  --mp-surface-soft: #f3f0f8;
+  --mp-text: #252331;
+  --mp-muted: #777484;
+  --mp-accent: #8170b8;
+  --mp-accent-dark: #655493;
+  --mp-border: #ebe8ef;
+  --mp-shadow: 0 12px 35px rgba(48, 38, 67, 0.06);
+  --mp-radius: 18px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--mp-bg) !important;
+  color: var(--mp-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::selection {
+  background: #ded6f1;
+  color: #252331;
+}
+
+/* Typography */
+
+h1, h2, h3, h4 {
+  color: var(--mp-text);
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+}
+
+h1 {
+  font-weight: 750;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+p {
+  color: var(--mp-muted);
+  line-height: 1.75;
+}
+
+/* Navigation */
+
+header,
+nav,
+.navbar,
+.site-header {
+  background: rgba(250, 249, 247, 0.92);
+  border-bottom: 1px solid var(--mp-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Buttons */
+
+button,
+.btn,
+.button,
+a.button,
+input[type="submit"] {
+  border-radius: 12px;
+  transition: background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+button:hover,
+.btn:hover,
+.button:hover,
+a.button:hover {
+  transform: translateY(-2px);
+}
+
+/* Primary actions */
+
+button[type="submit"],
+.btn-primary,
+.primary-btn,
+.button-primary,
+a.btn-primary {
+  background: var(--mp-accent);
+  color: #ffffff;
+  border: 1px solid var(--mp-accent);
+  box-shadow: 0 5px 16px rgba(129, 112, 184, 0.16);
+}
+
+button[type="submit"]:hover,
+.btn-primary:hover,
+.primary-btn:hover,
+.button-primary:hover {
+  background: var(--mp-accent-dark);
+}
+
+/* Secondary actions */
+
+.btn-secondary,
+.button-secondary,
+.secondary-btn {
+  background: #ffffff;
+  color: var(--mp-text);
+  border: 1px solid var(--mp-border);
+}
+
+/* Cards and panels */
+
+.card,
+.feature-card,
+.pricing-card,
+.info-card,
+.panel,
+.dashboard-card,
+.stat-card,
+.result-card {
+  background: var(--mp-surface);
+  border: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius);
+  box-shadow: var(--mp-shadow);
+}
+
+/* Forms */
+
+input,
+textarea,
+select {
+  background: #ffffff;
+  color: var(--mp-text);
+  border: 1px solid #e5e1eb;
+  border-radius: 11px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--mp-accent);
+  box-shadow: 0 0 0 3px rgba(129, 112, 184, 0.11);
+}
+
+/* Links */
+
+a {
+  color: var(--mp-accent-dark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  color: var(--mp-accent);
+}
+
+/* Images */
+
+img {
+  max-width: 100%;
+}
+
+/* Subtle separators */
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--mp-border);
+}
+
+/* Modals */
+
+.modal,
+.auth-modal,
+.dialog {
+  background: var(--mp-surface);
+  border: 1px solid var(--mp-border);
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(35, 27, 48, 0.14);
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th, td {
+  border-bottom: 1px solid var(--mp-border);
+  padding: 12px 14px;
+}
+
+th {
+  background: #f7f5fa;
+  color: var(--mp-text);
+}
+
+/* Selection */
+
+::selection {
+  background: #ded6f1;
+  color: #252331;
+}
+
+/* Mobile refinement */
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 10vw, 3.4rem);
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
+  }
+
+  .card,
+  .feature-card,
+  .pricing-card,
+  .panel {
+    border-radius: 15px;
+  }
+
+  button,
+  .btn,
+  .button {
+    min-height: 44px;
+  }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
