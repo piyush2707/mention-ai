@@ -6,15 +6,15 @@
 ========================================= */
 
 :root {
-  --mp-bg: #faf9f7;
+  --mp-bg: #f7f8fc;
   --mp-surface: #ffffff;
-  --mp-surface-soft: #f3f0f8;
-  --mp-text: #252331;
-  --mp-muted: #777484;
+  --mp-surface-soft: #f3f2fa;
+  --mp-text: #252536;
+  --mp-muted: #777889;
   --mp-accent: #8170b8;
   --mp-accent-dark: #655493;
-  --mp-border: #ebe8ef;
-  --mp-shadow: 0 12px 35px rgba(48, 38, 67, 0.06);
+  --mp-border: #e9eaf1;
+  --mp-shadow: 0 12px 35px rgba(40, 40, 65, 0.05);
   --mp-radius: 18px;
 }
 
@@ -62,7 +62,7 @@ header,
 nav,
 .navbar,
 .site-header {
-  background: rgba(250, 249, 247, 0.92);
+  background: rgba(247, 248, 252, 0.94);
   border-bottom: 1px solid var(--mp-border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
